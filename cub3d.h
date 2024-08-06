@@ -48,7 +48,7 @@ char	*ft_strjoin(char *holder, char *buff);
 int		find_new_line(char *str);
 char	*ft_first_line(char *first_str);
 char	*ft_last_line(char *last_str);
-char	**ft_split(char const *str, char c);
+char	**spliter(char const *str);
 void	*ft_calloc(size_t count, size_t size);	
 
 

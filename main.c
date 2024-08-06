@@ -83,6 +83,6 @@ int	main(int ac, char **av)
 	open_fd(av[1], &fd);
 	struct_instialisation(&config, av[1]);
 	map_inistialisation(&config, &fd);
-	printf("PATH: %s\nMAP: %s\n", config.path, config.map[0]);
+	printf("PATH: %s\nMAP: %s\nHeight: %d", config.path, config.map[0], config.map_height);
 
 }
