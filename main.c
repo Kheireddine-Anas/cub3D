@@ -74,6 +74,23 @@ void	map_inistialisation(t_config *config, int *fd)
 	close(*fd);
 }
 
+int	skip_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (!line[i] || line[i] == '\n')
+		return (1);
+	return (0);
+}
+
+void	map_data_check(t_config *config)
+{
+	skip_line(config->map);
+}
+
 int	main(int ac, char **av)
 {
 	int			fd;
@@ -83,6 +100,7 @@ int	main(int ac, char **av)
 	open_fd(av[1], &fd);
 	struct_instialisation(&config, av[1]);
 	map_inistialisation(&config, &fd);
+	map_data_check(&config);
 	printf("PATH: %s\nMAP: %s\nHeight: %d", config.path, config.map[0], config.map_height);
 
 }
