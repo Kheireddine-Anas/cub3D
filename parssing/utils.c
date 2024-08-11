@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

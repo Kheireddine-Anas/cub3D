@@ -73,16 +73,58 @@ void	map_inistialisation(t_config *config, int *fd)
 	}
 	close(*fd);
 }
-
+int	close_window(t_config **data)
+{
+	mlx_destroy_window((*data)->mlx_ptr, (*data)->win_ptr);
+	mlx_destroy_image((*data)->mlx_ptr, (*data)->img);
+	ft_putstr_fd(" close window", 1);
+	// free_3d_char_array(data);
+	free(*data); 
+	exit(0); 
+}
+void	fontion_mlx_and_draw(t_config **data)
+{
+	// mlx_key_hook((*data)->win_ptr, key_press, data);
+	mlx_hook((*data)->win_ptr, 17, 0, close_window, data);
+}
+void	initial_data(t_config **data, char **argv)
+{
+	(void)argv;
+	(*data)->width_window = 1300;
+	(*data)->height_window = 1300;
+}
+void	error_intalis(t_config **data)
+{
+	ft_putstr_fd("Failed to initialize mlx.\n", 2);
+	free(data);
+	exit (1);
+}
 int	main(int ac, char **av)
 {
-	int			fd;
-	t_config	config;
-
-	check_extenstion(av[1], ac);
-	open_fd(av[1], &fd);
-	struct_instialisation(&config, av[1]);
-	map_inistialisation(&config, &fd);
-	printf("PATH: %s\nMAP: %s\nHeight: %d", config.path, config.map[0], config.map_height);
-
+	// int			fd;
+	t_config	*data;
+	(void)ac;
+	// check_extenstion(av[1], ac);
+	// open_fd(av[1], &fd);
+	// struct_instialisation(&data, av[1]);
+	// map_inistialisation(&data, &fd);
+	data = (t_config *)malloc(sizeof(t_config));
+	data->mlx_ptr = mlx_init();
+	initial_data(&data, av);
+	if (data->mlx_ptr == NULL)
+		error_intalis(&data);
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->width_window,
+			data->height_window, "CUB3D project");
+	if (data->win_ptr == NULL)
+		error_intalis(&data);
+	data->img = mlx_new_image(data->mlx_ptr, 1300, 1300);
+	if (!data->img)
+		error_intalis(&data);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
+			&data->line_length, &data->endian);
+	fontion_mlx_and_draw(&data);
+	mlx_loop(data->mlx_ptr);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	return (0);
 }
+

@@ -1,34 +1,32 @@
-NAME = cub3d
 
-SRC =	main.c get_next_line_utils.c get_next_line.c spliter.c utils.c
+SRCS =	main.c getNextLine/get_next_line_utils_bonus.c getNextLine/get_next_line_bonus.c parssing/spliter.c parssing/utils.c
 
-CFLAGS = -Wall -Wextra -Werror
-# CFLAGS = -Wall -Wextra -Werror -Imlx
+OBJS			= $(SRCS:.c=.o)
 
-OBJ = ${SRC:.c=.o}
-# OBJ_BONUS = ${SRC_BONUS:.c=.o}
+CC				= gcc
+RM				= rm -f
+CFLAGS			= -O3 -Wall -Wextra -Werror -I.
+LIBS			= -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+MLX				= libmlx.dylib
+NAME			= cub3D
+LIBFT 			= libft/libft.a
+all:			$(NAME)
 
-all : $(NAME)
+$(NAME):		$(MLX) $(OBJS)
+				@$(MAKE) -C libft 
+				gcc ${CFLAGS} -o ${NAME} libft/libft.a	${OBJS} ${LIBS}
 
-# %.o: %.c
-# 	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
+$(MLX):
+				@$(MAKE) -C mlx
+				@mv mlx/$(MLX) 
 
-$(NAME): $(OBJ)
-		$(CC) $(OBJ) -o $(NAME)
-# $(NAME): $(OBJ)
-# 		$(CC) $(OBJ) -L/usr/local/include -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+clean:
+				@$(MAKE) -C mlx clean
+				$(RM) $(OBJS) $(BONUS_OBJS)
 
-# $(NAME): $(OBJ)
-# 		$(CC) $(OBJ) -Lmlx_linux ./minilibx-linux/libmlx_Linux.a -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
-# bonus : $(NAME_BONUS)
+fclean:			clean
+				$(RM) $(NAME) $(MLX)
 
-# $(NAME_BONUS): $(OBJ_BONUS)
-# 				cc $(CFLAGS) $^ -o $(NAME_BONUS)
+re:				fclean $(NAME)
 
-clean : 
-	rm -rf $(OBJ) $(OBJ_BONUS)
-
-fclean : clean
-	rm -rf $(NAME) $(NAME_BONUS)
-
-re : fclean all
+.PHONY:			all clean fclean re

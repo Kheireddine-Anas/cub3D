@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../cub/mlx"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"mlx.h": "c"
+		}
+	}
+}

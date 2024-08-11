@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "../cub3d.h"
+
 void	*ft_calloc(int count, int size)
 {
 	char	*memory;

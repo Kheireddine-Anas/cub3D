@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   testing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/20 09:34:14 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/04 15:41:46 by akheired         ###   ########.fr       */
+/*   Created: 2024/08/06 11:51:18 by ahamdi            #+#    #+#             */
+/*   Updated: 2024/08/06 11:51:22 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static size_t	count_word(const char *str)
 {
@@ -21,9 +21,9 @@ static size_t	count_word(const char *str)
 	i = 0;
 	while (str[i])
 	{
-		while (str[i] && str[i] != '\n' && (str[i] == ' ' || str[i] == '\t'))
+		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
-		if (str[i] && str[i] != '\n')
+		if (str[i])
 			count++;
 		while (str[i] && str[i] != ' ' && str[i] != '\t')
 			i++;
@@ -36,7 +36,7 @@ static size_t	count_len(const char *str)
 	size_t	i;
 
 	i = 0;
-	while (str[i] && str[i] != '\n' && str[i] != ' ' && str[i] != '\t')
+	while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '\n')
 		i++;
 	return (i);
 }
@@ -44,16 +44,19 @@ static size_t	count_len(const char *str)
 static char	*str_alloc(const char *str)
 {
 	char	*word;
-	size_t	i;
-	size_t	worldlen;
+	int		i;
+	int		worldlen;
 
-	i = -1;
+	i = 0;
 	worldlen = count_len(str);
 	word = (char *)malloc(sizeof(char) * (worldlen + 1));
 	if (!word)
 		return (NULL);
-	while (++i < worldlen)
+	while (i < worldlen)
+	{
 		word[i] = str[i];
+		i++;
+	}
 	word[i] = '\0';
 	return (word);
 }
@@ -69,7 +72,7 @@ char	**ft_split(char const *str)
 		return (NULL);
 	while (*str != '\0')
 	{
-		while (*str && (*str == ' ' || str[i] == '\t'))
+		while (*str && (*str == ' ' || *str == '\t'))
 			str++;
 		if (*str)
 		{
@@ -78,9 +81,32 @@ char	**ft_split(char const *str)
 				return (NULL);
 			i++;
 		}
-		while (*str && str[i] != ' ' && str[i] != '\t')
+		while (*str && *str != ' ' && *str != '\t')
 			str++;
 	}
-	strings[i] = 0;
+	strings[i] = NULL;
 	return (strings);
 }
+
+// int main()
+// {
+//     const char *str = "	C  225 	, 	30	,	0 ";
+//     char **result = ft_split(str);
+
+//     if (!result)
+//     {
+//         printf("Memory allocation failed.\n");
+//         return (1);
+//     }
+
+//     printf("Split strings:\n");
+//     for (int i = 0; result[i] != NULL; i++)
+//     {
+//         printf("%s\n", result[i]);
+//         free(result[i]);
+//     }
+
+//     free(result);
+
+//     return (0);
+// }
