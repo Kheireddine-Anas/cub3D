@@ -86,9 +86,38 @@ int	skip_line(char *line)
 	return (0);
 }
 
+void	free_line(char **line)
+{
+	int	i;
+
+	i = -1;
+	while (line[++i])
+		free(line[i]);
+	free(line);
+}
+
+void	init_fc(t_config *config, char *line, int i, char *fc_config)
+{
+
+}
+
 void	map_data_check(t_config *config)
 {
-	skip_line(config->map);
+	int		i;
+	char	**line;
+
+	i = 1;
+	while (config->map[i])
+	{
+		if (skip_line(config->map))
+			continue;
+		line = spliter(config->map[i]);
+		if (check_config(line, config) && config->config_count < 6)
+			printf("Invalide Config\n");exit(1);
+		if (!ft_strcmp(line[0], "F") || !ft_strcmp(line[0], "C"))
+			init_fc(config, config->map[i], i, line[0]);
+		free_line(line); //Freeing Lines
+	}
 }
 
 int	main(int ac, char **av)

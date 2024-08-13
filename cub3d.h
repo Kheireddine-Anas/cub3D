@@ -35,21 +35,23 @@ typedef struct s_config
 	char	*east_texture;
 	int		*floor_color;
 	int		*ceiling_color;
-	int		counter;
+	int		config_count;
 	int		map_height;
 }		t_config;
 
+int	ft_strcmp(char *s1, char *s2);
+char	*get_next_line(int fd); // Assuming you have implemented this function
+char	**spliter(char const *str);
+void	*ft_calloc(size_t count, size_t size);	
+//GPTER
 void	erroring(int err);
 void	check_extenstion(char *exe, int ac);
 void	parse_rgb(char *line, int *color);
 void	parse_cub_file(char *filename, t_config *config);
-char	*get_next_line(int fd); // Assuming you have implemented this function
 char	*ft_strjoin(char *holder, char *buff);
 int		find_new_line(char *str);
 char	*ft_first_line(char *first_str);
 char	*ft_last_line(char *last_str);
-char	**spliter(char const *str);
-void	*ft_calloc(size_t count, size_t size);	
 
 
 
