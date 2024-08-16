@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 16:29:18 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/05 19:46:27 by akheired         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:31:01 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*str_alloc(const char *str)
 	return (word);
 }
 
-char	**spliter(char const *str)
+char	**spliter(char *str)
 {
 	char	**strings;
 	size_t	i;

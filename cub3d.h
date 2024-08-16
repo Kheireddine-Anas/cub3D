@@ -27,6 +27,7 @@
 typedef struct s_config
 {
 	char	**map;
+	char	**cp_map;
 	char	*path;
 	int		fd_map;
 	char	*north_texture;
@@ -37,12 +38,22 @@ typedef struct s_config
 	int		*ceiling_color;
 	int		config_count;
 	int		map_height;
+	int		map_size;
+	int		player_x;
+	int		player_y;
+	int		player_direction;
+	int		p_d_count;
 }		t_config;
 
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_strlen(char *str);
+char	*ft_strdup(char *s);
+char	*ft_substr(char *s, int start, int len);
 char	*get_next_line(int fd); // Assuming you have implemented this function
-char	**spliter(char const *str);
-void	*ft_calloc(size_t count, size_t size);	
+char	**spliter(char *str);
+char	**ft_split(char *s, char c);
+void	*ft_calloc(size_t count, size_t size);
+int		*init_color(char **tab);
 //GPTER
 void	erroring(int err);
 void	check_extenstion(char *exe, int ac);

@@ -1,6 +1,6 @@
 NAME = cub3d
 
-SRC =	main.c get_next_line_utils.c get_next_line.c spliter.c utils.c
+SRC =	main.c get_next_line_utils.c get_next_line.c ft_split.c spliter.c utils.c
 
 CFLAGS = -Wall -Wextra -Werror
 # CFLAGS = -Wall -Wextra -Werror -Imlx

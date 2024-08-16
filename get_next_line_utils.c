@@ -6,13 +6,13 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 19:04:38 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/03 16:03:37 by akheired         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:55:31 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-size_t	ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	size_t	i;
 

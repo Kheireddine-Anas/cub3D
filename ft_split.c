@@ -6,81 +6,89 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/20 09:34:14 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/04 15:41:46 by akheired         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:30:22 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static size_t	count_word(const char *str)
+static size_t	cwords(char const *str, char c)
 {
 	size_t	i;
-	size_t	count;
+	size_t	counter;
 
-	count = 0;
 	i = 0;
-	while (str[i])
+	counter = 0;
+	while (*(str + i))
 	{
-		while (str[i] && str[i] != '\n' && (str[i] == ' ' || str[i] == '\t'))
-			i++;
-		if (str[i] && str[i] != '\n')
-			count++;
-		while (str[i] && str[i] != ' ' && str[i] != '\t')
+		if (*(str + i) != c)
+		{
+			counter++;
+			while (*(str + i) && *(str + i) != c)
+				i++;
+		}
+		else if (*(str + i) == c)
 			i++;
 	}
-	return (count);
+	return (counter);
 }
 
-static size_t	count_len(const char *str)
+static size_t	word_len(char const *s, char c)
 {
 	size_t	i;
 
 	i = 0;
-	while (str[i] && str[i] != '\n' && str[i] != ' ' && str[i] != '\t')
+	while (*(s + i) && *(s + i) != c)
 		i++;
 	return (i);
 }
 
-static char	*str_alloc(const char *str)
+static void	fr_er(char **dst, size_t i)
 {
-	char	*word;
-	size_t	i;
-	size_t	worldlen;
-
-	i = -1;
-	worldlen = count_len(str);
-	word = (char *)malloc(sizeof(char) * (worldlen + 1));
-	if (!word)
-		return (NULL);
-	while (++i < worldlen)
-		word[i] = str[i];
-	word[i] = '\0';
-	return (word);
+	while (i > 0)
+	{
+		i--;
+		free(*(dst + i));
+	}
+	free (dst);
 }
 
-char	**ft_split(char const *str)
+static char	**spliters(char *s, char c, char **dst, size_t words)
 {
-	char	**strings;
 	size_t	i;
+	size_t	j;
 
 	i = 0;
-	strings = (char **)malloc(sizeof(char *) * (count_word(str) + 1));
-	if (!strings)
-		return (NULL);
-	while (*str != '\0')
+	j = 0;
+	while (i < words)
 	{
-		while (*str && (*str == ' ' || str[i] == '\t'))
-			str++;
-		if (*str)
+		while (*(s + j) && *(s + j) == c)
+			j++;
+		*(dst + i) = ft_substr(s, j, word_len((s + j), c));
+		if (!*(dst + i))
 		{
-			strings[i] = str_alloc(str);
-			if (!strings[i])
-				return (NULL);
-			i++;
+			fr_er(dst, i);
+			return (NULL);
 		}
-		while (*str && str[i] != ' ' && str[i] != '\t')
-			str++;
+		while (*(s + j) && *(s + j) != c)
+			j++;
+		i++;
 	}
-	strings[i] = 0;
-	return (strings);
+	*(dst + i) = NULL;
+	return (dst);
+}
+
+char	**ft_split(char *s, char c)
+{
+	size_t	words;
+	char	**dst;
+
+	if (!s)
+		return (NULL);
+	words = cwords(s, c);
+	dst = malloc(sizeof(char *) * (words + 1));
+	if (!dst)
+		return (NULL);
+	dst = spliters(s, c, dst, words);
+	return (dst);
 }
