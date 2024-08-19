@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 08:15:14 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/16 09:09:58 by akheired         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:58:06 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ int	main(int ac, char **av)
 	check_map(&config);
 	check_player(&config);
 	check_valid_map(&config);
-	system("leaks cub3D");
+	system("leaks cub3d");
 }
