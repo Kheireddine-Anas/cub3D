@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 15:35:57 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/03/21 16:13:30 by ahamdi           ###   ########.fr       */
+/*   Created: 2024/01/08 15:26:19 by ahamdi            #+#    #+#             */
+/*   Updated: 2024/08/06 14:10:37 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 char	*ft_premierstr(char *s, int i)
 {

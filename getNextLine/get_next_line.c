@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 15:34:52 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/03/21 16:12:55 by ahamdi           ###   ########.fr       */
+/*   Created: 2024/01/08 12:37:45 by ahamdi            #+#    #+#             */
+/*   Updated: 2024/08/11 17:27:21 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 void	ft_chekfree(char *str, char *buff)
 {
@@ -48,7 +48,7 @@ char	*ft_read(int fd, char *str, int r_byt)
 
 char	*get_next_line(int fd)
 {
-	static char	*str[OPEN_MAX];
+	static char	*str;
 	char		*line;
 	size_t		i;
 	int			r_byt;
@@ -56,21 +56,17 @@ char	*get_next_line(int fd)
 	r_byt = 1;
 	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0) 
-	{
-		free(str[fd]);
-		str[fd] = NULL;
 		return (NULL);
-	}
-	str[fd] = ft_read(fd, str[fd], r_byt);
-	if (!str[fd])
+	str = ft_read(fd, str, r_byt);
+	if (!str)
 		return (NULL);
-	line = ft_premierstr(str[fd], i);
+	line = ft_premierstr(str, i);
 	if (!line)
 	{
-		free(str[fd]);
-		str[fd] = NULL;
+		free(str);
+		str = NULL;
 		return (NULL);
 	}
-	str[fd] = ft_desiemstr(str[fd], i);
+	str = ft_desiemstr(str, i);
 	return (line);
 }

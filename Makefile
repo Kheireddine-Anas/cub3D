@@ -1,32 +1,33 @@
-
-SRCS =	main.c getNextLine/get_next_line_utils_bonus.c getNextLine/get_next_line_bonus.c parssing/spliter.c parssing/utils.c
+SRCS =	main.c getNextLine/get_next_line_utils.c getNextLine/get_next_line.c parsing/util1_chek_and_initialis.c parsing/util2_map_initailis.c texture/draw.c texture/control_kebord.c\
+		texture/draw_util1.c
 
 OBJS			= $(SRCS:.c=.o)
 
-CC				= gcc
-RM				= rm -f
-CFLAGS			= -O3 -Wall -Wextra -Werror -I.
-LIBS			= -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
-MLX				= libmlx.dylib
-NAME			= cub3D
-LIBFT 			= libft/libft.a
-all:			$(NAME)
+CC			= cc
+RM			= rm -f
+CFLAGS		=  -Wall -Wextra -Werror   
+# -fsanitize=address
+MLX_LIB	=   MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/ahamdi/.brew/opt/glfw/lib/"
+NAME		= cub3D
+LIBFT 		= libft/libft.a
 
-$(NAME):		$(MLX) $(OBJS)
-				@$(MAKE) -C libft 
-				gcc ${CFLAGS} -o ${NAME} libft/libft.a	${OBJS} ${LIBS}
+all:		$(NAME)
 
-$(MLX):
-				@$(MAKE) -C mlx
-				@mv mlx/$(MLX) 
+$(NAME):	$(OBJS)
+			make -C libft 
+			$(CC) ${CFLAGS} -o ${NAME} ${LIBFT} ${OBJS} ${MLX_LIB}
+
+%.o:	%.c
+			$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-				@$(MAKE) -C mlx clean
-				$(RM) $(OBJS) $(BONUS_OBJS)
+			make -C libft clean
+			$(RM) $(OBJS)
 
-fclean:			clean
-				$(RM) $(NAME) $(MLX)
+fclean:		clean
+			make -C libft fclean
+			$(RM) $(NAME)
 
-re:				fclean $(NAME)
+re:			fclean $(NAME)
 
-.PHONY:			all clean fclean re
+.PHONY:		all clean fclean re
