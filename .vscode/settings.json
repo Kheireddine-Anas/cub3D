@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"mlx.h": "c",
+		"array": "c",
+		"iterator": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"__node_handle": "c"
+	},
+	"github.copilot.advanced": {
+		
+	}
+}
