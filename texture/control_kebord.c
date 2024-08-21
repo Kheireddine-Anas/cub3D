@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:49:12 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/18 13:26:50 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/19 13:20:56 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,16 @@ void	key_press(mlx_key_data_t keydata, void *param)
 	double		angle_rad;
 	int			i;
 	int			j;
+	int			xold_i;
+	int			yold_j;
 
-	i = 0;
-	j = 0;
 	data = (t_config **)param;
+	if (data == NULL || *data == NULL || (*data)->map == NULL
+		|| (*data)->map->map_buffer == NULL)
+	{
+		// Gérer l'erreur si les données sont nulles
+		return ;
+	}
 	if (keydata.key == 256)
 	{
 		close_window(data);
@@ -62,12 +68,16 @@ void	key_press(mlx_key_data_t keydata, void *param)
 	if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN
 		|| mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_DOWN))
 	{
-		i = (((*data)->player.x + ((*data)->mouve_palyer_left - (MOVE_STEP
-							* cos(angle_rad))))) / (*data)->size;
-		j = (((*data)->player.y + ((*data)->mouve_palyer_haut) - (MOVE_STEP
-						* sin(angle_rad)))) / (*data)->size;
+		xold_i = ((*data)->player.x + (*data)->mouve_palyer_left) / (*data)->size;
+		yold_j = ((*data)->player.y + (*data)->mouve_palyer_haut) / (*data)->size;
+		i = (((*data)->player.x + (*data)->mouve_palyer_left) - (MOVE_STEP
+					* cos(angle_rad))) / (*data)->size;
+		j = (((*data)->player.y + (*data)->mouve_palyer_haut) - (MOVE_STEP
+					* sin(angle_rad))) / (*data)->size;
 		if ((*data)->map->map_buffer[j]
-			&& (*data)->map->map_buffer[j][i] != '1')
+			&& (*data)->map->map_buffer[j][xold_i] != '1'
+			&& (*data)->map->map_buffer[yold_j]
+			&& (*data)->map->map_buffer[yold_j][i] != '1')
 		{
 			(*data)->mouve_palyer_left -= MOVE_STEP * cos(angle_rad);
 			(*data)->mouve_palyer_haut -= MOVE_STEP * sin(angle_rad);
@@ -77,12 +87,16 @@ void	key_press(mlx_key_data_t keydata, void *param)
 	}
 	else if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
 	{
-		i = (((*data)->player.x + ((*data)->mouve_palyer_left + (MOVE_STEP
-							* cos(angle_rad))))) / (*data)->size;
-		j = (((*data)->player.y + ((*data)->mouve_palyer_haut) + (MOVE_STEP
-						* sin(angle_rad)))) / (*data)->size;
+		xold_i = ((*data)->player.x + (*data)->mouve_palyer_left) / (*data)->size;
+		yold_j = ((*data)->player.y + (*data)->mouve_palyer_haut) / (*data)->size;
+		i = (((*data)->player.x + (*data)->mouve_palyer_left) + (MOVE_STEP
+					* cos(angle_rad))) / (*data)->size;
+		j = (((*data)->player.y + (*data)->mouve_palyer_haut) + (MOVE_STEP
+					* sin(angle_rad))) / (*data)->size;
 		if ((*data)->map->map_buffer[j]
-			&& (*data)->map->map_buffer[j][i] != '1')
+			&& (*data)->map->map_buffer[j][xold_i] != '1'
+			&& (*data)->map->map_buffer[yold_j]
+			&& (*data)->map->map_buffer[yold_j][i] != '1')
 		{
 			(*data)->mouve_palyer_left += MOVE_STEP * cos(angle_rad);
 			(*data)->mouve_palyer_haut += MOVE_STEP * sin(angle_rad);
@@ -103,7 +117,9 @@ void	key_press(mlx_key_data_t keydata, void *param)
 		draw(data);
 	}
 	else
+	{
 		contro_(keydata.key, data, angle_rad);
+	}
 }
 
 void	fontion_mlx_and_draw(t_config **data)

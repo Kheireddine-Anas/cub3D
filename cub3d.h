@@ -14,7 +14,7 @@
 #include <float.h> 
 
 #define FOV M_PI / 2 
-#define RAY_STEP M_PI / 36
+#define RAY_STEP M_PI / 1000
 #define MOVE_STEP 6
 #define ROTATION_ANGLE 0.1
 typedef struct s_map

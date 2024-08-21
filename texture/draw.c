@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:45:00 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/19 10:00:05 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/19 13:59:26 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	draw_line(t_config **data, int x0, int y0, double x1, double y1,
 	int	error;
 	int	map_x;
 	int	map_y;
+	int	map_x1;
+	int	map_y1;
 	int	error2;
 
 	if (data == NULL || *data == NULL || (*data)->map == NULL
@@ -101,11 +103,8 @@ void	draw_line(t_config **data, int x0, int y0, double x1, double y1,
 	error = deltaX - deltaY;
 	while (x0 != x1 || y0 != y1)
 	{
-		map_x = x0 / size;
-		map_y = y0 / size;
-		if ((*data)->map->map_buffer[map_y][map_x] == '1')
-			break ;
-		mlx_put_pixel((*data)->img, x0, y0, color);
+		map_x = x0;
+		map_y = y0;
 		error2 = error * 2;
 		if (error2 > -deltaY)
 		{
@@ -117,6 +116,11 @@ void	draw_line(t_config **data, int x0, int y0, double x1, double y1,
 			error += deltaX;
 			y0 += signY;
 		}
+		map_x1 = x0 / size;
+		map_y1 = y0 / size;
+		if ((*data)->map->map_buffer[map_y /  size][map_x1] == '1' && (*data)->map->map_buffer[map_y1][map_x /  size] == '1' && (*data)->map->map_buffer[map_y1][map_x1] == '1')
+			break ;
+		mlx_put_pixel((*data)->img, map_x, map_y, color);
 	}
 }
 
