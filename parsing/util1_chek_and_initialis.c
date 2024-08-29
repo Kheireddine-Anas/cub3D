@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:40:58 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/15 10:07:59 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/27 15:55:29 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,13 @@ void	struct_instialisation(t_config **data, char *map_name)
 	(*data)->map_name = map_name;
 	(*data)->width_window = 1000;
 	(*data)->height_window = 1000;
-	(*data)->mouv_left = 0;
-	(*data)->mouv_camera_left = 0;
-	(*data)->mouve_palyer_left = 0;
-	(*data)->mouve_palyer_haut = 0;
+	(*data)->player.x = 0;
+	(*data)->player.y = 0;
+	(*data)->player.angle = 0;
+	(*data)->move_x = 0;
+	(*data)->move_y = 0;
+	(*data)->size = 0;
+	(*data)->player.fov_rd = FOV;
 }
 
 void	free_double_array(char **str)

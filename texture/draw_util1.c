@@ -6,19 +6,11 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:22:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/19 12:14:06 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/28 21:45:47 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int rgb_to_int(int red, int green, int blue)
-{
-    if (red < 0) red = 0; else if (red > 255) red = 255;
-    if (green < 0) green = 0; else if (green > 255) green = 255;
-    if (blue < 0) blue = 0; else if (blue > 255) blue = 255;
-    return (red << 16) | (green << 8) | blue;
-}
 
 
 void	calcul_size(t_config **data)
@@ -36,16 +28,6 @@ void	calcul_size(t_config **data)
 		(*data)->size = cell_height;
 }
 
-void	my_mlx_pixel_put(t_config **data, int x, int y, int color)
-{
-	char	*dst;
-
-	if (x < 0 || y < 0 || x >= 1300 || y >= 1300)
-		return ;
-	dst = (*data)->addr + (y * (*data)->line_length + 
-			x * ((*data)->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
 
 void	draw_square(t_config **data, int x, int y, int color)
 {
