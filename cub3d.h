@@ -14,14 +14,16 @@
 #include <float.h> 
 
 
-#define FOV M_PI / 4 
-#define RAY_STEP M_PI / 1000
-#define PLAYER_SPEED 6
-#define ROTATION_SPEED 0.1
+#define FOV 60
+#define S_W 1500
+#define RAY_STEP M_PI / 1800
+#define PLAYER_SPEED_MINI_MAP 2.7
+#define PLAYER_SPEED   PLAYER_SPEED_MINI_MAP * 4
+#define ROTATION_SPEED 0.2
 #define TRUE 1
 #define FALSE 0
-#define PI 3.14159265
-#define TWO_PI 2 * PI
+#define size_ 8
+#define TWO_PI 2 * M_PI
 # define BLK 0x000000FF
 # define GREY 0x808080
 # define BLU 0x87CEEBFF
@@ -46,21 +48,21 @@ typedef struct s_map
 }		t_map;
 typedef struct s_ray
 {
-    float rayAngle;
-    float wallHitX;
-    float wallHitY;
-    float distance;
-    int wasHitVertical;
-    int isRayFacingUp;
-    int isRayFacingDown;
-    int isRayFacingLeft;
-    int isRayFacingRight;
-    int wallHitContent;
-} t_ray;
+	int		index;
+	double	ray_ngl;
+	double	horiz_x;
+	double	horiz_y;
+	double	vert_x;
+	double	vert_y;
+	double	distance;
+	int		flag;
+}	t_ray;
 typedef struct s_palyer
 {
 	int			x;
 	int			y;
+	int			x_mini;
+	int			y_mini;
 	double		angle;
 	float		fov_rd;
 }		t_player;
@@ -84,14 +86,17 @@ typedef struct s_config
 	double		mouv_camera_left;
 	double			move_x;
 	double			move_y;
+	double			move_x_min;
+	double			move_y_min;
 	int 		size;
+	int			size_mini_map;
 	int			key;
 	t_player	player;
 	t_ray		ray;
 	int dist;
 }		t_config;
 void	draw_player(t_config **data, int x, int y, int color);
-void	draw(t_config **data);
+void	draw_mini_map(t_config **data);
 void	free_doube_eraay(char **str);
 void	destroy_data(t_config **data);
 void	fontion_mlx_and_draw(t_config **data);
@@ -106,17 +111,15 @@ void	error_intalis(t_config ** data);
 int		close_window(t_config **data);
 void	calcul_size(t_config **data);
 void	draw_square(t_config **data, int x, int y, int color);
-void	draw_all_rays(t_config **data);
-int		rgb_to_int(int red, int green, int blue);
-void castAllRays(t_config *data);
+void	castAllRays(t_config **data);
 void	draw_line(t_config *data, double x0, double y0, double x1, double y1,
 		int color);
-		void	draw_player_rays(t_config **data);
-void	draw_player_rays(t_config **data);
-void	cast_rays(t_config *data);
-double chek_vertical(t_config *data, double rayAngle);
-double chek_orizental(t_config *data, double rayAngle);
-int mapHasWallAt(t_config *data, float x, float y);
-double normalizeAngle(double angle);
-double distanceBetweenPoints(double x1, double y1, double x2, double y2);
+double	check_vertical(t_config *data, double rayAngle);
+double	check_horizontal(t_config *data, double rayAngle);
+double	normalizeAngle(double angle);
+double	distanceBetweenPoints(double x1, double y1, double x2, double y2);
+void render_wall(t_config *data, int ray, double distance,  double angle);
+void    castAllRays_minimap(t_config *data);
+double check_horizontal_mini(t_config *data, double rayAngle);
+double check_vertical_mini(t_config *data, double rayAngle);
 #endif

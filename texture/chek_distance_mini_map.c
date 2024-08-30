@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chek_distance.c                                    :+:      :+:    :+:   */
+/*   chek_distance_mini_map.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:37:07 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/29 17:02:06 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/30 16:49:22 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	check_intersection(t_config *data, double xintercept, double Hintercept)
+int	check_intersection_mini(t_config *data, double xintercept, double Hintercept)
 {
 	int	mapGridIndexX;
 	int	mapGridIndexY;
@@ -20,8 +19,8 @@ int	check_intersection(t_config *data, double xintercept, double Hintercept)
 	if (xintercept < 0 || xintercept >= data->width_window || Hintercept < 0
 		|| Hintercept >= data->height_window)
 		return (0);
-	mapGridIndexX = (int)floor(xintercept / data->size);
-	mapGridIndexY = (int)floor(Hintercept / data->size);
+	mapGridIndexX = (int)floor(xintercept / size_);
+	mapGridIndexY = (int)floor(Hintercept / size_);
 	if (mapGridIndexX < 0 || mapGridIndexX >= data->map->map_width
 		|| mapGridIndexY < 0 || mapGridIndexY >= data->map->map_height)
 		return (0);
@@ -29,8 +28,7 @@ int	check_intersection(t_config *data, double xintercept, double Hintercept)
 		return (0);
 	return (1);
 }
-
-double check_horizontal(t_config *data, double rayAngle)
+double check_horizontal_mini(t_config *data, double rayAngle)
 {
     int isRayFacingDown;
     int isRayFacingUp;
@@ -48,23 +46,21 @@ double check_horizontal(t_config *data, double rayAngle)
     double yToCheck;
 
     rayAngle = normalizeAngle(rayAngle);
-    player_x = data->player.x + data->move_x;
-    player_y = data->player.y + data->move_y;
+    player_x = data->player.x_mini + data->move_x_min;
+    player_y = data->player.y_mini + data->move_y_min;
 
     isRayFacingDown = (rayAngle > 0 && rayAngle < M_PI);
     isRayFacingUp = !isRayFacingDown;
     isRayFacingRight = (rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI);
     isRayFacingLeft = !isRayFacingRight;
-
-    // Calcul des intercepts horizontaux
-    Hintercept = floor(player_y / data->size) * data->size;
+    Hintercept = floor(player_y / size_) * size_;
     if (isRayFacingDown)
-        Hintercept += data->size;
+        Hintercept += size_;
     xintercept = player_x + (Hintercept - player_y) / tan(rayAngle);
-    ystep = data->size;
+    ystep = size_;
     if (isRayFacingUp)
         ystep *= -1;
-    xstep = data->size / tan(rayAngle);
+    xstep = size_ / tan(rayAngle);
     if ((isRayFacingRight && xstep < 0) || (isRayFacingLeft && xstep > 0))
         xstep *= -1;
 
@@ -77,7 +73,7 @@ double check_horizontal(t_config *data, double rayAngle)
         xToCheck = nextHorzTouchX;
         yToCheck = nextHorzTouchY + (isRayFacingUp ? -1 : 0); // Ajustement pour les rayons se dirigeant vers le haut
 
-        if (!check_intersection(data, xToCheck, yToCheck))
+        if (!check_intersection_mini(data, xToCheck, yToCheck))
             break;
         else 
         {
@@ -88,7 +84,8 @@ double check_horizontal(t_config *data, double rayAngle)
 
     return distanceBetweenPoints(player_x, player_y, nextHorzTouchX, nextHorzTouchY);
 }
-double check_vertical(t_config *data, double rayAngle)
+
+double check_vertical_mini(t_config *data, double rayAngle)
 {
     int isRayFacingDown;
     int isRayFacingUp;
@@ -106,8 +103,8 @@ double check_vertical(t_config *data, double rayAngle)
     double yToCheck;
 
     rayAngle = normalizeAngle(rayAngle);
-    player_x = data->player.x + data->move_x;
-    player_y = data->player.y + data->move_y;
+    player_x = data->player.x_mini + data->move_x_min;
+    player_y = data->player.y_mini + data->move_y_min;
 
     isRayFacingDown = (rayAngle > 0 && rayAngle < M_PI);
     isRayFacingUp = !isRayFacingDown;
@@ -115,16 +112,16 @@ double check_vertical(t_config *data, double rayAngle)
     isRayFacingLeft = !isRayFacingRight;
 
     // Calcul des intercepts verticaux
-    Vintercept = floor(player_x / data->size) * data->size;
+    Vintercept = floor(player_x / size_) * size_;
     if (isRayFacingRight)
-        Vintercept += data->size;
+        Vintercept += size_;
     yintercept = player_y + (Vintercept - player_x) * tan(rayAngle);
 
-    xstep = data->size;
+    xstep = size_;
     if (isRayFacingLeft)
         xstep *= -1;
 
-    ystep = data->size * tan(rayAngle);
+    ystep = size_ * tan(rayAngle);
     if (isRayFacingUp && ystep > 0)
         ystep *= -1;
     if (isRayFacingDown && ystep < 0)
@@ -139,7 +136,7 @@ double check_vertical(t_config *data, double rayAngle)
         xToCheck = nextVertTouchX + (isRayFacingLeft ? -1 : 0); // Ajustement pour les rayons se dirigeant vers la gauche
         yToCheck = nextVertTouchY;
 
-        if (!check_intersection(data, xToCheck, yToCheck))
+        if (!check_intersection_mini(data, xToCheck, yToCheck))
             break;
         else
         {

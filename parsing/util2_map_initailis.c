@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:42:38 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/16 10:54:00 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/30 12:22:27 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	get_height_map(t_config **data)
 	close(fd);
 	(*data)->map->map_height = i;
 }
-
-
 
 char	*map_info(t_config **data)
 {

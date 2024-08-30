@@ -14,7 +14,8 @@
 		"unordered_map": "c",
 		"utility": "c",
 		"algorithm": "c",
-		"float.h": "c"
+		"float.h": "c",
+		"chrono": "c"
 	},
 	"github.copilot.advanced": {
 		

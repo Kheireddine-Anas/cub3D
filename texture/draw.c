@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:45:00 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/28 23:23:45 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/30 18:24:38 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,31 @@ void	determine_engle(t_config **data, int i, int j)
 	if ((*data)->map->map_buffer[i][j] == 'S')
 		(*data)->player.angle = 270;
 }
+void	while__minimap(t_config **data, int i, int *j)
+{
+	int	x;
+	int	y;
+
+	while ((*data)->map->map_buffer[i][*j])
+	{
+		x = *j * size_;
+		y = i * size_;
+		if ((*data)->map->map_buffer[i][*j] == '1')
+			draw_square(data, x, y, 0xFF0000FF);
+		else if ((*data)->map->map_buffer[i][*j] == '0')
+			draw_square(data, x, y, 0x02f7b2);
+		if ((*data)->map->map_buffer[i][*j] == 'N'
+			|| (*data)->map->map_buffer[i][*j] == 'S'
+			|| (*data)->map->map_buffer[i][*j] == 'W'
+			|| (*data)->map->map_buffer[i][*j] == 'E')
+			{
+				(*data)->player.x_mini = x;
+				(*data)->player.y_mini = y;
+				draw_square(data, x, y, 0x02f7b2);
+			}
+		(*j)++;
+	}
+}
 void	while_(t_config **data, int i, int *j)
 {
 	int	x;
@@ -55,10 +80,6 @@ void	while_(t_config **data, int i, int *j)
 	{
 		x = *j * (*data)->size;
 		y = i * (*data)->size;
-		if ((*data)->map->map_buffer[i][*j] == '1')
-			draw_square(data, x, y, 0xFF0000FF);
-		else if ((*data)->map->map_buffer[i][*j] == '0')
-			draw_square(data, x, y, 0x02f7b2);
 		if ((*data)->map->map_buffer[i][*j] == 'N'
 			|| (*data)->map->map_buffer[i][*j] == 'S'
 			|| (*data)->map->map_buffer[i][*j] == 'W'
@@ -67,7 +88,6 @@ void	while_(t_config **data, int i, int *j)
 			(*data)->player.x = x;
 			(*data)->player.y = y;
 			determine_engle(data, i, *j);
-			draw_square(data, x, y, 0x02f7b2);
 		}
 		(*j)++;
 	}
@@ -102,46 +122,30 @@ void	draw_line(t_config *data, double x0, double y0, double x1, double y1,
 		y0 += y_step;
 	}
 }
-
-void	draw_player_rays(t_config **data)
-{
-	int		player_x;
-	int		player_y;
-	double	ray_angle;
-	double	end_angle;
-	double ray_x;
-	double	ray_y;
-
-	player_x = (*data)->player.x + (*data)->move_x;
-	player_y = (*data)->player.y + (*data)->move_y;
-	end_angle = ((*data)->player.angle + (*data)->mouv_camera_left) + FOV / 2;
-	ray_angle = ((*data)->player.angle + (*data)->mouv_camera_left)  -  FOV / 2;
-	while (ray_angle <= end_angle)
-	{
-		ray_x = player_x + 10 * cos(ray_angle);
-		ray_y = player_y + 10 * sin(ray_angle);
-		draw_line(*data, player_x, player_y, ray_x, ray_y, 0xFFFFFF);
-		ray_angle += RAY_STEP;
-	}
-}
-void	draw(t_config **data)
+void	draw_mini_map(t_config **data)
 {
 	int	i;
 	int	j;
 
 	if (!((*data)->img = mlx_new_image((*data)->mlx_ptr, (*data)->width_window, (*data)->height_window)))
 		error_intalis(data);
-	calcul_size(data);
 	i = 0;
+	(*data)->size = size_ * 4;
 	while ((*data)->map->map_buffer[i])
 	{
 		j = 0;
 		while_(data, i, &j);
 		i++;
 	}
-	draw_player(data, (*data)->player.x + (*data)->move_x,
-		(*data)->player.y + (*data)->move_y, 0xFF000000);
-	castAllRays(*data);
+	castAllRays(data);
+	i = 0;
+	while ((*data)->map->map_buffer[i])
+	{ 
+		j = 0;
+		while__minimap(data, i, &j);
+		i++;
+	}
+	castAllRays_minimap(*data);
 	if (mlx_image_to_window((*data)->mlx_ptr, (*data)->img, 0, 0) == -1)
 		error_intalis(data);
 }

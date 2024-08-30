@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:33:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/29 13:24:28 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/30 16:48:42 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,12 @@
 
 double normalizeAngle(double angle)
 {
-    angle = remainder(angle, TWO_PI);
+    angle = fmod(angle, 2 * M_PI);
     if (angle < 0) 
-        angle += TWO_PI;
+        angle = (2 * M_PI) + angle; 
+    if (angle > 2 * M_PI)
+        angle = angle - (2 * M_PI);
     return angle;
-}
-int mapHasWallAt(t_config *data,float x, float y)
-{
-    if (x < 0 || x >= data->width_window || y < 0 || y >= data->height_window) {
-        return TRUE;
-    }
-    int mapGridIndexX = floor(x / data->size);
-    int mapGridIndexY = floor(y / data->size);
-	if (mapGridIndexX < 0 || mapGridIndexX >= data->map->map_width || mapGridIndexY < 0 || mapGridIndexY >= data->map->map_height) {
-		return TRUE;
-	}
-    return data->map->map_buffer[mapGridIndexY][mapGridIndexX] != 0;
 }
 
 double distanceBetweenPoints(double x1, double y1, double x2, double y2)
@@ -38,31 +28,62 @@ double distanceBetweenPoints(double x1, double y1, double x2, double y2)
 }
 
 
-void    castAllRays(t_config *data)
+void    castAllRays(t_config **data)
 {
     double ray_x;
     double ray_y;
-    double end_angle;
     double dis_vertical;
     double dis_horizontal;
-    double ray_angle;
+    int  ray = 0;
     double dis;
-    int		player_x = data->player.x + data->move_x;
-   	int		player_y = data->player.y + data->move_y;
-    ray_angle = (data->player.angle + data->mouv_camera_left) - FOV / 2;
-    end_angle = (data->player.angle + data->mouv_camera_left) + FOV / 2;
+    int		player_x = (*data)->player.x +(*data)->move_x;
+   	int		player_y = (*data)->player.y +(*data)->move_y;
+  (*data)->ray.ray_ngl = ((*data)->player.angle +(*data)->mouv_camera_left) - ((*data)->player.fov_rd / 2);;
 
-    while (ray_angle <= end_angle)
+    while (ray < (*data)->width_window)
     {
-        dis_horizontal= chek_orizental(data,  ray_angle);
-        dis_vertical = chek_vertical(data,  ray_angle);
+        dis_horizontal= check_horizontal(*data,(*data)->ray.ray_ngl);
+        dis_vertical = check_vertical(*data,(*data)->ray.ray_ngl);
+        (*data)->ray.flag = 0;
+        if (dis_horizontal < dis_vertical)
+        {
+           (*data)->ray.flag = 1;
+            dis = dis_horizontal;
+        }
+        else
+            dis = dis_vertical;
+        ray_x = player_x +   dis  * cos((*data)->ray.ray_ngl);
+        ray_y = player_y +  dis  * sin((*data)->ray.ray_ngl);
+       render_wall(*data, ray, dis,(*data)->ray.ray_ngl);
+       (*data)->ray.ray_ngl += ((*data)->player.fov_rd /(*data)->width_window); 
+        ray++;
+    }
+}
+
+void    castAllRays_minimap(t_config *data)
+{
+    double ray_x;
+    double ray_y;
+    double dis_vertical;
+    double dis_horizontal;
+    int  ray = 0;
+    double dis;
+    double ray_angle;
+    int		player_x = data->player.x_mini + data->move_x_min;
+   	int		player_y = data->player.y_mini + data->move_y_min;
+    ray_angle = (data->player.angle + data->mouv_camera_left) - (data->player.fov_rd / 2);;
+    while (ray < data->width_window)
+    {
+        dis_horizontal = check_horizontal_mini(data,ray_angle);
+        dis_vertical =  check_vertical_mini(data,ray_angle);
         if (dis_horizontal < dis_vertical)
             dis = dis_horizontal;
         else
             dis = dis_vertical;
-        ray_x = player_x +  dis * cos(ray_angle);
-        ray_y = player_y + dis * sin(ray_angle);
-        draw_line(data, player_x, player_y,  ray_x , ray_y, 0xFF9300FF);
-        ray_angle += RAY_STEP;
+        ray_x = player_x +   dis  * cos(ray_angle);
+        ray_y = player_y +  dis  * sin(ray_angle);
+        draw_line(data, player_x, player_y,  ray_x , ray_y, ORNG );
+       ray_angle += (data->player.fov_rd / data->width_window); 
+        ray++; 
     }
 }
