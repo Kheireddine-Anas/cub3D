@@ -19,5 +19,6 @@
 	},
 	"github.copilot.advanced": {
 		
-	}
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }

@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:45:00 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/30 18:24:38 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/31 10:54:48 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ void	while__minimap(t_config **data, int i, int *j)
 		x = *j * size_;
 		y = i * size_;
 		if ((*data)->map->map_buffer[i][*j] == '1')
-			draw_square(data, x, y, 0xFF0000FF);
+			draw_square(data, x , y, BLU);
 		else if ((*data)->map->map_buffer[i][*j] == '0')
-			draw_square(data, x, y, 0x02f7b2);
+			draw_square(data, x , y, GREY);
 		if ((*data)->map->map_buffer[i][*j] == 'N'
 			|| (*data)->map->map_buffer[i][*j] == 'S'
 			|| (*data)->map->map_buffer[i][*j] == 'W'
@@ -66,7 +66,7 @@ void	while__minimap(t_config **data, int i, int *j)
 			{
 				(*data)->player.x_mini = x;
 				(*data)->player.y_mini = y;
-				draw_square(data, x, y, 0x02f7b2);
+				draw_square(data, x , y, GREY);
 			}
 		(*j)++;
 	}

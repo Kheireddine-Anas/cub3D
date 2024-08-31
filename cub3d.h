@@ -15,6 +15,7 @@
 
 
 #define FOV 60
+#define TILE_SIZE_R 16
 #define S_W 1500
 #define RAY_STEP M_PI / 1800
 #define PLAYER_SPEED_MINI_MAP 2.7
@@ -114,11 +115,11 @@ void	draw_square(t_config **data, int x, int y, int color);
 void	castAllRays(t_config **data);
 void	draw_line(t_config *data, double x0, double y0, double x1, double y1,
 		int color);
-double	check_vertical(t_config *data, double rayAngle);
-double	check_horizontal(t_config *data, double rayAngle);
+double	check_vertical(t_config **data, double rayAngle);
+double	check_horizontal(t_config **data, double rayAngle);
 double	normalizeAngle(double angle);
 double	distanceBetweenPoints(double x1, double y1, double x2, double y2);
-void render_wall(t_config *data, int ray, double distance,  double angle);
+void render_wall(t_config **data, int ray, double distance,  double angle);
 void    castAllRays_minimap(t_config *data);
 double check_horizontal_mini(t_config *data, double rayAngle);
 double check_vertical_mini(t_config *data, double rayAngle);

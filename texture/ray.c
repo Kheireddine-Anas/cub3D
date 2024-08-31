@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:33:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/30 16:48:42 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/31 12:30:12 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void    castAllRays(t_config **data)
 
     while (ray < (*data)->width_window)
     {
-        dis_horizontal= check_horizontal(*data,(*data)->ray.ray_ngl);
-        dis_vertical = check_vertical(*data,(*data)->ray.ray_ngl);
+        dis_horizontal= check_horizontal(data,(*data)->ray.ray_ngl);
+        dis_vertical = check_vertical(data,(*data)->ray.ray_ngl);
         (*data)->ray.flag = 0;
         if (dis_horizontal < dis_vertical)
         {
@@ -54,7 +54,7 @@ void    castAllRays(t_config **data)
             dis = dis_vertical;
         ray_x = player_x +   dis  * cos((*data)->ray.ray_ngl);
         ray_y = player_y +  dis  * sin((*data)->ray.ray_ngl);
-       render_wall(*data, ray, dis,(*data)->ray.ray_ngl);
+       render_wall(data, ray, dis,(*data)->ray.ray_ngl);
        (*data)->ray.ray_ngl += ((*data)->player.fov_rd /(*data)->width_window); 
         ray++;
     }

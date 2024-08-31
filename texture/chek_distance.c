@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:37:07 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/29 17:02:06 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/08/31 12:33:27 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_intersection(t_config *data, double xintercept, double Hintercept)
 	return (1);
 }
 
-double check_horizontal(t_config *data, double rayAngle)
+double check_horizontal(t_config **data, double rayAngle)
 {
     int isRayFacingDown;
     int isRayFacingUp;
@@ -48,8 +48,8 @@ double check_horizontal(t_config *data, double rayAngle)
     double yToCheck;
 
     rayAngle = normalizeAngle(rayAngle);
-    player_x = data->player.x + data->move_x;
-    player_y = data->player.y + data->move_y;
+    player_x = (*data)->player.x + (*data)->move_x;
+    player_y = (*data)->player.y + (*data)->move_y;
 
     isRayFacingDown = (rayAngle > 0 && rayAngle < M_PI);
     isRayFacingUp = !isRayFacingDown;
@@ -57,27 +57,27 @@ double check_horizontal(t_config *data, double rayAngle)
     isRayFacingLeft = !isRayFacingRight;
 
     // Calcul des intercepts horizontaux
-    Hintercept = floor(player_y / data->size) * data->size;
+    Hintercept = floor(player_y / (*data)->size) * (*data)->size;
     if (isRayFacingDown)
-        Hintercept += data->size;
+        Hintercept += (*data)->size;
     xintercept = player_x + (Hintercept - player_y) / tan(rayAngle);
-    ystep = data->size;
+    ystep = (*data)->size;
     if (isRayFacingUp)
         ystep *= -1;
-    xstep = data->size / tan(rayAngle);
+    xstep = (*data)->size / tan(rayAngle);
     if ((isRayFacingRight && xstep < 0) || (isRayFacingLeft && xstep > 0))
         xstep *= -1;
 
     nextHorzTouchX = xintercept;
     nextHorzTouchY = Hintercept;
 
-    while (nextHorzTouchX >= 0 && nextHorzTouchX <= data->width_window &&
-           nextHorzTouchY >= 0 && nextHorzTouchY <= data->height_window)
+    while (nextHorzTouchX >= 0 && nextHorzTouchX <= (*data)->width_window &&
+           nextHorzTouchY >= 0 && nextHorzTouchY <= (*data)->height_window)
     {
         xToCheck = nextHorzTouchX;
         yToCheck = nextHorzTouchY + (isRayFacingUp ? -1 : 0); // Ajustement pour les rayons se dirigeant vers le haut
 
-        if (!check_intersection(data, xToCheck, yToCheck))
+        if (!check_intersection(*data, xToCheck, yToCheck))
             break;
         else 
         {
@@ -85,10 +85,11 @@ double check_horizontal(t_config *data, double rayAngle)
             nextHorzTouchY += ystep;
         }
     }
-
+    (*data)->ray.horiz_x = nextHorzTouchX;
+    (*data)->ray.horiz_y = nextHorzTouchY;
     return distanceBetweenPoints(player_x, player_y, nextHorzTouchX, nextHorzTouchY);
 }
-double check_vertical(t_config *data, double rayAngle)
+double check_vertical(t_config **data, double rayAngle)
 {
     int isRayFacingDown;
     int isRayFacingUp;
@@ -106,8 +107,8 @@ double check_vertical(t_config *data, double rayAngle)
     double yToCheck;
 
     rayAngle = normalizeAngle(rayAngle);
-    player_x = data->player.x + data->move_x;
-    player_y = data->player.y + data->move_y;
+    player_x = (*data)->player.x + (*data)->move_x;
+    player_y = (*data)->player.y + (*data)->move_y;
 
     isRayFacingDown = (rayAngle > 0 && rayAngle < M_PI);
     isRayFacingUp = !isRayFacingDown;
@@ -115,16 +116,16 @@ double check_vertical(t_config *data, double rayAngle)
     isRayFacingLeft = !isRayFacingRight;
 
     // Calcul des intercepts verticaux
-    Vintercept = floor(player_x / data->size) * data->size;
+    Vintercept = floor(player_x / (*data)->size) * (*data)->size;
     if (isRayFacingRight)
-        Vintercept += data->size;
+        Vintercept += (*data)->size;
     yintercept = player_y + (Vintercept - player_x) * tan(rayAngle);
 
-    xstep = data->size;
+    xstep = (*data)->size;
     if (isRayFacingLeft)
         xstep *= -1;
 
-    ystep = data->size * tan(rayAngle);
+    ystep = (*data)->size * tan(rayAngle);
     if (isRayFacingUp && ystep > 0)
         ystep *= -1;
     if (isRayFacingDown && ystep < 0)
@@ -133,13 +134,13 @@ double check_vertical(t_config *data, double rayAngle)
     nextVertTouchX = Vintercept;
     nextVertTouchY = yintercept;
 
-    while (nextVertTouchX >= 0 && nextVertTouchX <= data->width_window &&
-           nextVertTouchY >= 0 && nextVertTouchY <= data->height_window)
+    while (nextVertTouchX >= 0 && nextVertTouchX <= (*data)->width_window &&
+           nextVertTouchY >= 0 && nextVertTouchY <= (*data)->height_window)
     {
         xToCheck = nextVertTouchX + (isRayFacingLeft ? -1 : 0); // Ajustement pour les rayons se dirigeant vers la gauche
         yToCheck = nextVertTouchY;
 
-        if (!check_intersection(data, xToCheck, yToCheck))
+        if (!check_intersection(*data, xToCheck, yToCheck))
             break;
         else
         {
@@ -147,6 +148,7 @@ double check_vertical(t_config *data, double rayAngle)
             nextVertTouchY += ystep;
         }
     }
-
+    (*data)->ray.vert_x =    nextVertTouchX;
+    (*data)->ray.vert_y =    nextVertTouchX;
     return distanceBetweenPoints(player_x, player_y, nextVertTouchX, nextVertTouchY);
 }
