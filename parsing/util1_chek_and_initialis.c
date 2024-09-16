@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:40:58 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/30 12:11:04 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/15 17:26:07 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,18 @@ void	struct_instialisation(t_config **data, char *map_name)
 	(*data)->map->ceiling_color = NULL;
 	(*data)->counter = 0;
 	(*data)->map_name = map_name;
-	(*data)->width_window = 1500;
+	(*data)->width_window = 1900;
 	(*data)->height_window = 1000;
+	(*data)->texture_or = mlx_load_png("textures/seamless_stone.png");
+	(*data)->texture_ver = mlx_load_png("textures/girl_with_a_pearl_earring.png");
 	(*data)->player.x = 0;
 	(*data)->player.y = 0;
 	(*data)->player.angle = 0;
 	(*data)->move_x = 0;
 	(*data)->move_y = 0;
 	(*data)->size = 0;
+	(*data)->dor_x = -1;
+	(*data)->dor_y = -1;
 	(*data)->player.fov_rd = (FOV * M_PI) / 180;
 }
 

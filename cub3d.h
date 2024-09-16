@@ -15,15 +15,16 @@
 
 
 #define FOV 60
-#define TILE_SIZE_R 16
-#define S_W 1500
+# define S_W 1900
+# define S_H 1000
+# define TILE_SIZE 10
+#define size_ 10
 #define RAY_STEP M_PI / 1800
-#define PLAYER_SPEED_MINI_MAP 2.7
-#define PLAYER_SPEED   PLAYER_SPEED_MINI_MAP * 4
-#define ROTATION_SPEED 0.2
+#define PLAYER_SPEED  2
+#define PLAYER_SPEED_MINI_MAP PLAYER_SPEED 
+#define ROTATION_SPEED 0.1
 #define TRUE 1
 #define FALSE 0
-#define size_ 8
 #define TWO_PI 2 * M_PI
 # define BLK 0x000000FF
 # define GREY 0x808080
@@ -62,10 +63,10 @@ typedef struct s_palyer
 {
 	int			x;
 	int			y;
-	int			x_mini;
-	int			y_mini;
+	double			x_mini;
+	double			y_mini;
 	double		angle;
-	float		fov_rd;
+	double		fov_rd;
 }		t_player;
 typedef struct s_config
 {
@@ -85,25 +86,37 @@ typedef struct s_config
 	int			width_window;
 	int			height_window;
 	double		mouv_camera_left;
-	double			move_x;
-	double			move_y;
-	double			move_x_min;
-	double			move_y_min;
+	double				move_x;
+	double				move_y;
+	mlx_texture_t	*texture_or;
+	mlx_texture_t	*texture_ver;
 	int 		size;
 	int			size_mini_map;
 	int			key;
+	int dor_x;
+	int dor_y;
 	t_player	player;
 	t_ray		ray;
+	int flag;
 	int dist;
+	int strat_x;
+	int strat_y;
+	int end_x;
+	int end_y;
 }		t_config;
-void	draw_player(t_config **data, int x, int y, int color);
-void	draw_mini_map(t_config **data);
+void draw_update(t_config **data);
+void cherch_pos_dor(t_config **data);
+void    castAllRays_minimap(t_config *data);
+void open_dor(t_config **data);
+void	draw(t_config **data);
 void	free_doube_eraay(char **str);
+void 	draw_card(t_config *data);
 void	destroy_data(t_config **data);
 void	fontion_mlx_and_draw(t_config **data);
 void	map_inistialisation(t_config **data);
 void	chek_argument_and_extention(int err, char *map_name);
 void	struct_instialisation(t_config **data, char *map_name);
+void draw_img(t_config **data);
 void	get_height_map(t_config **data);
 void	free_double_array(char **str);
 char	*delet_newlin(char *str);
@@ -112,6 +125,7 @@ void	error_intalis(t_config ** data);
 int		close_window(t_config **data);
 void	calcul_size(t_config **data);
 void	draw_square(t_config **data, int x, int y, int color);
+void draw_square_player(t_config **data, int x, int y, int color);
 void	castAllRays(t_config **data);
 void	draw_line(t_config *data, double x0, double y0, double x1, double y1,
 		int color);
@@ -123,4 +137,5 @@ void render_wall(t_config **data, int ray, double distance,  double angle);
 void    castAllRays_minimap(t_config *data);
 double check_horizontal_mini(t_config *data, double rayAngle);
 double check_vertical_mini(t_config *data, double rayAngle);
+void draw_star(t_config *data, int center_x, int center_y, int radius);
 #endif

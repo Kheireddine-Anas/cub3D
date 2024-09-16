@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:37:07 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/31 12:33:27 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/15 13:22:07 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_intersection(t_config *data, double xintercept, double Hintercept)
 	if (mapGridIndexX < 0 || mapGridIndexX >= data->map->map_width
 		|| mapGridIndexY < 0 || mapGridIndexY >= data->map->map_height)
 		return (0);
-	if (data->map->map_buffer[mapGridIndexY][mapGridIndexX] == '1')
+	if (data->map->map_buffer[mapGridIndexY][mapGridIndexX] == '1' || data->map->map_buffer[mapGridIndexY][mapGridIndexX] == 'P')
 		return (0);
 	return (1);
 }
@@ -39,8 +39,8 @@ double check_horizontal(t_config **data, double rayAngle)
     double xintercept;
     double Hintercept;
     double xstep;
-    int player_x;
-    int player_y;
+    double player_x;
+    double player_y;
     double ystep;
     double nextHorzTouchX;
     double nextHorzTouchY;
@@ -56,7 +56,6 @@ double check_horizontal(t_config **data, double rayAngle)
     isRayFacingRight = (rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI);
     isRayFacingLeft = !isRayFacingRight;
 
-    // Calcul des intercepts horizontaux
     Hintercept = floor(player_y / (*data)->size) * (*data)->size;
     if (isRayFacingDown)
         Hintercept += (*data)->size;
@@ -98,8 +97,8 @@ double check_vertical(t_config **data, double rayAngle)
     double Vintercept;
     double yintercept;
     double xstep;
-    int player_x;
-    int player_y;
+    double player_x;
+    double player_y;
     double ystep;
     double nextVertTouchX;
     double nextVertTouchY;
@@ -150,5 +149,5 @@ double check_vertical(t_config **data, double rayAngle)
     }
     (*data)->ray.vert_x =    nextVertTouchX;
     (*data)->ray.vert_y =    nextVertTouchX;
-    return distanceBetweenPoints(player_x, player_y, nextVertTouchX, nextVertTouchY);
+    return (distanceBetweenPoints(player_x, player_y, nextVertTouchX, nextVertTouchY));
 }
