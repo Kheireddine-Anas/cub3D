@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:33:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/15 19:06:08 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/17 10:39:15 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ double	distanceBetweenPoints(double x1, double y1, double x2, double y2)
 
 void	castAllRays(t_config **data)
 {
-	// double	ray_x;
-	// double	ray_y;
 	double	dis_vertical;
 	double	dis_horizontal;
 	int		ray;
@@ -38,28 +36,86 @@ void	castAllRays(t_config **data)
 	double	player_x;
 	double	player_y;
 
+	(*data)->rays = ft_calloc((*data)->width_window, sizeof(t_ray));
+	if (!(*data)->rays)
+	{
+		ft_putstr_fd("Error: Memory allocation failed\n", 2);
+		exit (1);
+	}
 	ray = 0;
 	player_x = (*data)->player.x + (*data)->move_x;
 	player_y = (*data)->player.y + (*data)->move_y;
 	(*data)->ray.ray_ngl = ((*data)->player.angle + (*data)->mouv_camera_left)
 		- ((*data)->player.fov_rd / 2);
+	(*data)->rays[ray].ray_ngl = (*data)->ray.ray_ngl;
 	while (ray < (*data)->width_window)
 	{
-		dis_horizontal = check_horizontal(data, (*data)->ray.ray_ngl);
-		dis_vertical = check_vertical(data, (*data)->ray.ray_ngl);
+		(*data)->rays[ray].index = ray;
+		dis_horizontal = check_horizontal(data, (*data)->ray.ray_ngl, ray);
+		dis_vertical = check_vertical(data, (*data)->ray.ray_ngl, ray);
 		if (dis_horizontal <= dis_vertical)
 		{
 			(*data)->ray.flag = 1;
+			(*data)->rays[ray].flag = 1;
 			dis = dis_horizontal;
 		}
 		else
 		{
 			(*data)->ray.flag = 0;
+			(*data)->rays[ray].flag = 0;
 			dis = dis_vertical;
 		}
+		(*data)->rays[ray].distance = dis;
 		render_wall(data, ray, dis, (*data)->ray.ray_ngl);
 		(*data)->ray.ray_ngl += ((*data)->player.fov_rd
 				/ (*data)->width_window);
 		ray++;
+		(*data)->rays[ray].ray_ngl = (*data)->ray.ray_ngl;
 	}
+}
+
+
+void	chek_door(t_config **data)
+{
+	int i;
+	int map_y;
+	int map_x;
+	
+	i = 0;
+	(*data)->dor_x = -1;
+	(*data)->dor_y = -1;
+	while (i < (*data)->width_window)
+	{
+		if ((*data)->rays[i].flag == 1)
+		{
+			map_y = (int)((*data)->rays[i].horiz_y / TILE_SIZE);
+    		map_x = (int)((*data)->rays[i].horiz_x / TILE_SIZE);
+			if ( (*data)->rays[i].distance <= 30 &&
+       			map_y >= 0 && map_y < (*data)->map->map_height && // Vérifiez la hauteur de la carte
+        		(*data)->map->map_buffer[map_y] &&
+        		map_x >= 0 && map_x < (*data)->map->map_width && // Vérifiez la largeur de la carte
+        		(*data)->map->map_buffer[map_y][map_x] == 'P')
+        	{
+				(*data)->dor_x = map_x;
+				(*data)->dor_y = map_y;
+			}
+
+		}
+		else
+		{
+			map_y = (int)((*data)->rays[i].vert_y / TILE_SIZE);
+    		map_x = (int)((*data)->rays[i].vert_x / TILE_SIZE);
+			if ( (*data)->rays[i].distance <= 30 &&
+       			map_y >= 0 && map_y < (*data)->map->map_height && // Vérifiez la hauteur de la carte
+        		(*data)->map->map_buffer[map_y] &&
+        		map_x >= 0 && map_x < (*data)->map->map_width && // Vérifiez la largeur de la carte
+        		(*data)->map->map_buffer[map_y][map_x] == 'P')
+        	{
+				(*data)->dor_x = map_x;
+				(*data)->dor_y = map_y;
+			}
+		}
+		i++;
+	}
+	// free((*data)->rays);
 }

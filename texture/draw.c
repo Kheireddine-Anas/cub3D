@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:45:00 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/15 17:09:59 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/16 11:55:35 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,41 +164,4 @@ void draw_update(t_config **data)
 	draw_minimap(data);
 	if (mlx_image_to_window((*data)->mlx_ptr, (*data)->img, 0, 0) == -1)
 		error_intalis(data);
-}
-void cherch_pos_dor(t_config **data)
-{
-	int i = 0;
-	int j;
-	double x;
-	double y;
-	double	player_x;
-	double	player_y;
-
-	player_x = (*data)->player.x + (*data)->move_x;
-	player_y = (*data)->player.y + (*data)->move_y;
-	while ((*data)->map->map_buffer[i])
-	{
-		y = i * (*data)->size;
-		j = 0;
-		while ((*data)->map->map_buffer[i][j])
-		{
-			x = j * (*data)->size;
-			if ((*data)->map->map_buffer[i][j] == 'P')
-			{
-				if (x >= (player_x -  5) && x <= (player_x + 5) && y >= (player_y - 5) && y >= (player_y +  5))
-				{
-					(*data)->dor_x = i;
-					(*data)->dor_y = j;
-					return ;
-				}
-				else
-				{
-					(*data)->dor_x = -1;
-					(*data)->dor_y = -1;
-				}
-			}
-			j++;
-		}
-		i++;
-	}
 }

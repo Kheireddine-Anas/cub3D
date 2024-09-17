@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:49:12 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/15 12:46:31 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/17 12:05:33 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	move_player(t_config **data)
 	}
 }
 
-void	hook(mlx_key_data_t keydata, void *ml)
+void	hook(void *ml)
 {
 	t_config **data;
 	double old_y;
@@ -68,12 +68,12 @@ void	hook(mlx_key_data_t keydata, void *ml)
 	double new_x;
 	double new_y;
 	data = ml;
-	(void)keydata;
+
 	if (mlx_is_key_down((*data)->mlx_ptr, 79))
 	{
-		cherch_pos_dor(data);
-		printf ("x_o %d\n",(*data)->dor_x);
-		printf ("y_o %d\n",(*data)->dor_y);
+		chek_door(data);
+		printf ("x %d\n",(*data)->dor_x);
+		printf ("y %d\n",(*data)->dor_y);
 		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
 			return ;
 		(*data)->map->map_buffer[(*data)->dor_x][(*data)->dor_y] = '0';
@@ -82,9 +82,9 @@ void	hook(mlx_key_data_t keydata, void *ml)
 	}
 	if (mlx_is_key_down((*data)->mlx_ptr, 67))
 	{
-		cherch_pos_dor(data);
-		printf ("x_c %d\n",(*data)->dor_x);
-		printf ("y_c %d\n",(*data)->dor_y);
+		chek_door(data);
+			printf ("x %d\n",(*data)->dor_x);
+		printf ("y %d\n",(*data)->dor_y);
 		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
 			return ;
 		(*data)->map->map_buffer[(*data)->dor_x][(*data)->dor_y] = 'P';
@@ -182,13 +182,11 @@ void	hook(mlx_key_data_t keydata, void *ml)
 	move_player(data);
 }
 
-void control_mousse(void *param)
+void control_mousse(t_config	**data)
 {
-	t_config	**data;
 	int			delta_x;
 	int x;
 	int y;
-	data = param;
 	mlx_get_mouse_pos((*data)->mlx_ptr, &x, &y);
 	delta_x = x - ((*data)->width_window / 2);
 	(*data)->mouv_camera_left += delta_x / 600.0;
@@ -198,16 +196,12 @@ void control_mousse(void *param)
 		(*data)->mouv_camera_left += 2 * M_PI;
 	mlx_set_mouse_pos((*data)->mlx_ptr, (*data)->width_window / 2,
 		(*data)->height_window / 2);
-	if ((*data)->img)
-	mlx_delete_image((*data)->mlx_ptr, (*data)->img);
-	draw_update(data);
 }
 
 void	fontion_mlx_and_draw(t_config **data)
 {
 	draw(data);
-	mlx_key_hook((*data)->mlx_ptr, hook, data);
+	mlx_loop_hook((*data)->mlx_ptr, hook, data);
 	mlx_set_cursor_mode((*data)->mlx_ptr, MLX_MOUSE_HIDDEN);
-	mlx_loop_hook((*data)->mlx_ptr, control_mousse, data);
 }
 

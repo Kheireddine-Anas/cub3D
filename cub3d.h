@@ -22,7 +22,7 @@
 #define RAY_STEP M_PI / 1800
 #define PLAYER_SPEED  2
 #define PLAYER_SPEED_MINI_MAP PLAYER_SPEED 
-#define ROTATION_SPEED 0.1
+#define ROTATION_SPEED 0.05
 #define TRUE 1
 #define FALSE 0
 #define TWO_PI 2 * M_PI
@@ -90,6 +90,7 @@ typedef struct s_config
 	double				move_y;
 	mlx_texture_t	*texture_or;
 	mlx_texture_t	*texture_ver;
+	mlx_texture_t	*texture_porte;
 	int 		size;
 	int			size_mini_map;
 	int			key;
@@ -97,6 +98,7 @@ typedef struct s_config
 	int dor_y;
 	t_player	player;
 	t_ray		ray;
+	t_ray		*rays;
 	int flag;
 	int dist;
 	int strat_x;
@@ -105,9 +107,8 @@ typedef struct s_config
 	int end_y;
 }		t_config;
 void draw_update(t_config **data);
+void control_mousse(t_config	**data);
 void cherch_pos_dor(t_config **data);
-void    castAllRays_minimap(t_config *data);
-void open_dor(t_config **data);
 void	draw(t_config **data);
 void	free_doube_eraay(char **str);
 void 	draw_card(t_config *data);
@@ -129,13 +130,10 @@ void draw_square_player(t_config **data, int x, int y, int color);
 void	castAllRays(t_config **data);
 void	draw_line(t_config *data, double x0, double y0, double x1, double y1,
 		int color);
-double	check_vertical(t_config **data, double rayAngle);
-double	check_horizontal(t_config **data, double rayAngle);
+double	check_vertical(t_config **data, double rayAngle, int i);
+double	check_horizontal(t_config **data, double rayAngle, int i);
 double	normalizeAngle(double angle);
 double	distanceBetweenPoints(double x1, double y1, double x2, double y2);
 void render_wall(t_config **data, int ray, double distance,  double angle);
-void    castAllRays_minimap(t_config *data);
-double check_horizontal_mini(t_config *data, double rayAngle);
-double check_vertical_mini(t_config *data, double rayAngle);
-void draw_star(t_config *data, int center_x, int center_y, int radius);
+void	chek_door(t_config **data);
 #endif

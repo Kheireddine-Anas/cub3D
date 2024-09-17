@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:37:07 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/15 13:22:07 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/17 12:01:38 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_intersection(t_config *data, double xintercept, double Hintercept)
 	return (1);
 }
 
-double check_horizontal(t_config **data, double rayAngle)
+double check_horizontal(t_config **data, double rayAngle, int i)
 {
     int isRayFacingDown;
     int isRayFacingUp;
@@ -84,11 +84,13 @@ double check_horizontal(t_config **data, double rayAngle)
             nextHorzTouchY += ystep;
         }
     }
-    (*data)->ray.horiz_x = nextHorzTouchX;
-    (*data)->ray.horiz_y = nextHorzTouchY;
+    (*data)->ray.horiz_x = xToCheck;
+    (*data)->ray.horiz_y =  yToCheck;
+    (*data)->rays[i].horiz_x = xToCheck;
+    (*data)->rays[i].horiz_y = yToCheck;
     return distanceBetweenPoints(player_x, player_y, nextHorzTouchX, nextHorzTouchY);
 }
-double check_vertical(t_config **data, double rayAngle)
+double check_vertical(t_config **data, double rayAngle, int i)
 {
     int isRayFacingDown;
     int isRayFacingUp;
@@ -147,7 +149,9 @@ double check_vertical(t_config **data, double rayAngle)
             nextVertTouchY += ystep;
         }
     }
-    (*data)->ray.vert_x =    nextVertTouchX;
-    (*data)->ray.vert_y =    nextVertTouchX;
+    (*data)->ray.vert_x =    xToCheck;
+    (*data)->ray.vert_y =     yToCheck;
+     (*data)->rays[i].vert_x =    xToCheck;
+    (*data)->rays[i].vert_y =    yToCheck;
     return (distanceBetweenPoints(player_x, player_y, nextVertTouchX, nextVertTouchY));
 }
