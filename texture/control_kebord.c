@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:49:12 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/17 12:05:33 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/18 17:29:42 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	move_player(t_config **data)
 	double			new_y;
 	static double	move_x = 0;
 	static double	move_y = 0;
-
 	new_x = (*data)->player.x + (*data)->move_x;
 	new_y = (*data)->player.y + (*data)->move_y;
 	map_grid_x = new_x / (*data)->size;
@@ -51,7 +50,7 @@ void	move_player(t_config **data)
 		move_x = (*data)->move_x;
 		move_y = (*data)->move_y;
 		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
-		draw_update(data);
+		draw_update(data, (*data)->texture_r);
 	}
 	else
 	{
@@ -68,28 +67,47 @@ void	hook(void *ml)
 	double new_x;
 	double new_y;
 	data = ml;
-
-	if (mlx_is_key_down((*data)->mlx_ptr, 79))
+	int pid;
+	control_mousse(data);
+	if (mlx_is_mouse_down((*data)->mlx_ptr, MLX_MOUSE_BUTTON_LEFT))
 	{
-		chek_door(data);
-		printf ("x %d\n",(*data)->dor_x);
-		printf ("y %d\n",(*data)->dor_y);
-		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
-			return ;
-		(*data)->map->map_buffer[(*data)->dor_x][(*data)->dor_y] = '0';
+		pid = fork();
+		if (pid == 0)
+		{
+			system("afplay textures/music_gunshot.mp3");
+		}
 		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
-		draw_update(data);
+		draw_update(data, (*data)->texture_pa);
+		return;
+		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
+		draw_update(data, (*data)->texture_r);
+		return;
 	}
-	if (mlx_is_key_down((*data)->mlx_ptr, 67))
+	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_O))
 	{
 		chek_door(data);
-			printf ("x %d\n",(*data)->dor_x);
-		printf ("y %d\n",(*data)->dor_y);
 		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
 			return ;
-		(*data)->map->map_buffer[(*data)->dor_x][(*data)->dor_y] = 'P';
-		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
-		draw_update(data);
+		if ((*data)->dor_y != 0 && (*data)->dor_x != (*data)->map->map_width -1 && (*data)->dor_y != (*data)->map->map_height -1)
+		{
+			(*data)->map->map_buffer[(*data)->dor_y][(*data)->dor_x] = '4';
+			mlx_delete_image((*data)->mlx_ptr, (*data)->img);
+			draw_update(data, (*data)->texture_r);
+		}
+		return ;
+	}
+	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_C))
+	{
+		chek_door(data);
+		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
+			return ;
+		if ((*data)->dor_y != 0 && (*data)->dor_x != (*data)->map->map_width -1 && (*data)->dor_y != (*data)->map->map_height -1)
+		{
+			(*data)->map->map_buffer[(*data)->dor_y][(*data)->dor_x] = 'P';
+			mlx_delete_image((*data)->mlx_ptr, (*data)->img);
+			draw_update(data, (*data)->texture_r);
+		}
+		return ;
 	}
 	if (mlx_is_key_down((*data)->mlx_ptr, 256)) // exit the game
 		close_window(data);
@@ -200,7 +218,7 @@ void control_mousse(t_config	**data)
 
 void	fontion_mlx_and_draw(t_config **data)
 {
-	draw(data);
+	draw(data, (*data)->texture_r);
 	mlx_loop_hook((*data)->mlx_ptr, hook, data);
 	mlx_set_cursor_mode((*data)->mlx_ptr, MLX_MOUSE_HIDDEN);
 }

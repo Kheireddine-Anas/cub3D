@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:06:49 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/17 12:03:01 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/21 18:31:29 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,23 @@ mlx_texture_t	*get_texture_bonus(t_config *mlx, int flag)
             	mlx->map->map_buffer[map_y] &&
             	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
             	mlx->map->map_buffer[map_y][map_x] == 'P')
-           			return (mlx->texture_porte);
-			else
+           			return (mlx->texture_close_dor);
+			else if ( mlx->map->map_buffer &&
+            	map_y >= 0 && map_y < mlx->map->map_height && // Vérifiez la hauteur de la carte
+            	mlx->map->map_buffer[map_y] &&
+            	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
+            	mlx->map->map_buffer[map_y][map_x] == 'K')
+           			return (mlx->texture_s);
+			else if ( mlx->map->map_buffer &&
+            	map_y >= 0 && map_y < mlx->map->map_height && // Vérifiez la hauteur de la carte
+            	mlx->map->map_buffer[map_y] &&
+            	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
+            	mlx->map->map_buffer[map_y][map_x] == '4')
 			{
-				printf ("%d\n",map_y);
-				printf ("%d\n",map_x);
-				return (mlx->texture_or);
+				return (mlx->texture_close_dor);
 			}
+			else
+				return (mlx->texture_or);
 		}
 		else
 		{
@@ -74,7 +84,21 @@ mlx_texture_t	*get_texture_bonus(t_config *mlx, int flag)
             	mlx->map->map_buffer[map_y] &&
             	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
             	mlx->map->map_buffer[map_y][map_x] == 'P')
-           			return (mlx->texture_porte);
+           			return (mlx->texture_close_dor);
+			else if ( mlx->map->map_buffer &&
+            	map_y >= 0 && map_y < mlx->map->map_height && // Vérifiez la hauteur de la carte
+            	mlx->map->map_buffer[map_y] &&
+            	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
+            	mlx->map->map_buffer[map_y][map_x] == 'K')
+           			return (mlx->texture_s);
+			else if ( mlx->map->map_buffer &&
+            	map_y >= 0 && map_y < mlx->map->map_height && // Vérifiez la hauteur de la carte
+            	mlx->map->map_buffer[map_y] &&
+            	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
+            	mlx->map->map_buffer[map_y][map_x] == '4')
+			{
+				return (mlx->texture_close_dor);
+			}
 			else
 				return (mlx->texture_or);
 		}
@@ -90,7 +114,21 @@ mlx_texture_t	*get_texture_bonus(t_config *mlx, int flag)
         	mlx->map->map_buffer[map_y] &&
         	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
         	mlx->map->map_buffer[map_y][map_x] == 'P')
-        		return (mlx->texture_porte);
+        		return (mlx->texture_close_dor);
+			else if ( mlx->map->map_buffer &&
+       		map_y >= 0 && map_y < mlx->map->map_height && // Vérifiez la hauteur de la carte
+        	mlx->map->map_buffer[map_y] &&
+        	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
+        	mlx->map->map_buffer[map_y][map_x] == 'K')
+        		return (mlx->texture_s);
+			else if ( mlx->map->map_buffer &&
+       		map_y >= 0 && map_y < mlx->map->map_height && // Vérifiez la hauteur de la carte
+        	mlx->map->map_buffer[map_y] &&
+        	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
+        	mlx->map->map_buffer[map_y][map_x] == '4')
+			{
+				return (mlx->texture_open_dor);
+			}
 			else
 				return (mlx->texture_ver);
 		}
@@ -101,7 +139,21 @@ mlx_texture_t	*get_texture_bonus(t_config *mlx, int flag)
         	mlx->map->map_buffer[map_y] &&
         	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
         	mlx->map->map_buffer[map_y][map_x] == 'P')
-        		return (mlx->texture_porte);
+        		return (mlx->texture_close_dor);
+			else if ( mlx->map->map_buffer &&
+       		map_y >= 0 && map_y < mlx->map->map_height && // Vérifiez la hauteur de la carte
+        	mlx->map->map_buffer[map_y] &&
+        	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
+        	mlx->map->map_buffer[map_y][map_x] == 'K')
+        		return (mlx->texture_s);
+			else if ( mlx->map->map_buffer &&
+       		map_y >= 0 && map_y < mlx->map->map_height && // Vérifiez la hauteur de la carte
+        	mlx->map->map_buffer[map_y] &&
+        	map_x >= 0 && map_x < mlx->map->map_width && // Vérifiez la largeur de la carte
+        	mlx->map->map_buffer[map_y][map_x] == '4')
+			{
+				return (mlx->texture_open_dor);
+			}
 			else
 				return (mlx->texture_ver);
 		}
@@ -123,11 +175,11 @@ double	get_x_o(mlx_texture_t *texture, t_config *mlx)
 void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 {
 	double			x_o;
-	double			y_o;
+	double			y_o = 0;
 	uint32_t		*arr;
 	double			y_step;
 	mlx_texture_t	*texture;
-
+	
 	texture = get_texture_bonus(mlx, mlx->ray.flag);
 	arr = (uint32_t *)texture->pixels;
 	y_step = (double)texture->height / wall_h;
@@ -137,8 +189,7 @@ void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 		y_o = 0;
 	while (top_pix < min_pix)
 	{
-				mlx_put_pixel(mlx->img, mlx->ray.index, top_pix,
-					reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
+		mlx_put_pixel(mlx->img, mlx->ray.index, top_pix, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
 		y_o += y_step;
 		top_pix++;
 	}
@@ -153,6 +204,7 @@ void	render_wall(t_config **data, int ray, double distance, double angle)
 	(void)angle;
 	distance *= cos(normalizeAngle(angle - ((*data)->player.angle
 					+ (*data)->mouv_camera_left))); // fix the fisheye
+	
 	(*data)->ray.distance = distance;
 	wall_h = ((*data)->size / distance) * (((*data)->width_window / 2)
 			/ tan((*data)->player.fov_rd / 2)); // get the wall height

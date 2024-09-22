@@ -16,7 +16,8 @@
 		"algorithm": "c",
 		"float.h": "c",
 		"chrono": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"get_next_line.h": "c"
 	},
 	"github.copilot.advanced": {
 		

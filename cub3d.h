@@ -3,14 +3,11 @@
 # define CUB3D_H
 
 # include <stdio.h>
-# include <string.h>
-# include <stdlib.h>
 # include <stdlib.h>
 # include <string.h>
 # include "getNextLine/get_next_line.h"
 # include "MLX42/include/MLX42/MLX42.h"
 # include <math.h>
-# include "fcntl.h"
 #include <float.h> 
 
 
@@ -90,7 +87,13 @@ typedef struct s_config
 	double				move_y;
 	mlx_texture_t	*texture_or;
 	mlx_texture_t	*texture_ver;
-	mlx_texture_t	*texture_porte;
+	mlx_texture_t	*texture_open_dor;
+	mlx_texture_t	*texture_close_dor;
+	mlx_texture_t	*texture_pa;
+	mlx_texture_t	*texture_r;
+	mlx_texture_t	*texture_s;
+	int				sprid_x;
+	int				sprid_y;
 	int 		size;
 	int			size_mini_map;
 	int			key;
@@ -106,10 +109,10 @@ typedef struct s_config
 	int end_x;
 	int end_y;
 }		t_config;
-void draw_update(t_config **data);
-void control_mousse(t_config	**data);
-void cherch_pos_dor(t_config **data);
-void	draw(t_config **data);
+void draw_image_at_position(t_config *data, mlx_texture_t *texture, int pos_x, int pos_y);
+void	draw_update(t_config **data, mlx_texture_t *texture);
+void	control_mousse(t_config	**data);
+void	draw(t_config **data, mlx_texture_t *texture);
 void	free_doube_eraay(char **str);
 void 	draw_card(t_config *data);
 void	destroy_data(t_config **data);
@@ -117,7 +120,6 @@ void	fontion_mlx_and_draw(t_config **data);
 void	map_inistialisation(t_config **data);
 void	chek_argument_and_extention(int err, char *map_name);
 void	struct_instialisation(t_config **data, char *map_name);
-void draw_img(t_config **data);
 void	get_height_map(t_config **data);
 void	free_double_array(char **str);
 char	*delet_newlin(char *str);
@@ -136,4 +138,6 @@ double	normalizeAngle(double angle);
 double	distanceBetweenPoints(double x1, double y1, double x2, double y2);
 void render_wall(t_config **data, int ray, double distance,  double angle);
 void	chek_door(t_config **data);
+void	draw_centered_image(t_config *data, mlx_texture_t *texture);
+int	reverse_bytes(int c);
 #endif

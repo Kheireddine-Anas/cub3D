@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:18:40 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/15 10:08:16 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/18 13:13:54 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char **av)
 {
 	t_config	*data;
 	int			i;
-
 	i = 0;
 	// atexit(leaks);
 	data = ft_calloc(1, sizeof(t_config));

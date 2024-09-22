@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:33:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/17 10:39:15 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/17 13:12:50 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	chek_door(t_config **data)
 	int i;
 	int map_y;
 	int map_x;
-	
+
 	i = 0;
 	(*data)->dor_x = -1;
 	(*data)->dor_y = -1;
@@ -90,29 +90,30 @@ void	chek_door(t_config **data)
 		{
 			map_y = (int)((*data)->rays[i].horiz_y / TILE_SIZE);
     		map_x = (int)((*data)->rays[i].horiz_x / TILE_SIZE);
-			if ( (*data)->rays[i].distance <= 30 &&
+			if ( (*data)->rays[i].distance <= 50 &&
        			map_y >= 0 && map_y < (*data)->map->map_height && // Vérifiez la hauteur de la carte
         		(*data)->map->map_buffer[map_y] &&
         		map_x >= 0 && map_x < (*data)->map->map_width && // Vérifiez la largeur de la carte
-        		(*data)->map->map_buffer[map_y][map_x] == 'P')
+        		((*data)->map->map_buffer[map_y][map_x] == 'P' || (*data)->map->map_buffer[map_y][map_x] == '4'))
         	{
 				(*data)->dor_x = map_x;
 				(*data)->dor_y = map_y;
+				return ;
 			}
-
 		}
 		else
 		{
 			map_y = (int)((*data)->rays[i].vert_y / TILE_SIZE);
     		map_x = (int)((*data)->rays[i].vert_x / TILE_SIZE);
-			if ( (*data)->rays[i].distance <= 30 &&
+			if ( (*data)->rays[i].distance <= 50 &&
        			map_y >= 0 && map_y < (*data)->map->map_height && // Vérifiez la hauteur de la carte
         		(*data)->map->map_buffer[map_y] &&
         		map_x >= 0 && map_x < (*data)->map->map_width && // Vérifiez la largeur de la carte
-        		(*data)->map->map_buffer[map_y][map_x] == 'P')
+        		((*data)->map->map_buffer[map_y][map_x] == 'P' || (*data)->map->map_buffer[map_y][map_x] == '4'))
         	{
 				(*data)->dor_x = map_x;
 				(*data)->dor_y = map_y;
+				return ;
 			}
 		}
 		i++;

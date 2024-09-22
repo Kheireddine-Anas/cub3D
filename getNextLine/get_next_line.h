@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:37:55 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/11 17:14:13 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/17 14:45:51 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 #include <fcntl.h>
-#include <stdio.h>
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 5
 # endif

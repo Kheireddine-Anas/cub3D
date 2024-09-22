@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:45:00 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/16 11:55:35 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/21 18:18:40 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,14 @@ void draw_minimap(t_config **data)
             			draw_square(data, x - (player_x - 100), y - (player_y - 100), WHI);
 					else if ((*data)->map->map_buffer[i][j] == 'P')
 						draw_square(data, x - (player_x - 100), y - (player_y - 100), BLU);
-        			else
-            			draw_square(data, x - (player_x - 100), y - (player_y - 100), GREY);
+        			else if ((*data)->map->map_buffer[i][j] == 'K')
+					{
+						(*data)->sprid_x = x;
+						(*data)->strat_y = y;
+						draw_square(data, x - (player_x - 100), y - (player_y - 100), RED);
+					}	
+					else
+						draw_square(data, x - (player_x - 100), y - (player_y - 100), GREY);
 				}
 				j++;
     		}
@@ -136,7 +142,7 @@ void draw_minimap(t_config **data)
 	}
 	draw_square_player(data, ((*data)->player.x / 2) - (((*data)->player.x / 2) - 100), ((*data)->player.y / 2) - (((*data)->player.y / 2) - 100), ORNG);
 }
-void	draw(t_config **data)
+void	draw(t_config **data,  mlx_texture_t *texture)
 {
 	int	i;
 	int	j;
@@ -153,15 +159,40 @@ void	draw(t_config **data)
 	}
 	castAllRays(data);
 	draw_minimap(data);
+	draw_centered_image(*data, texture);
 	if (mlx_image_to_window((*data)->mlx_ptr, (*data)->img, 0, 0) == -1)
 		error_intalis(data);
 }
-void draw_update(t_config **data)
+void draw_update(t_config **data, mlx_texture_t *texture)
 {
 	if (!((*data)->img = mlx_new_image((*data)->mlx_ptr, (*data)->width_window, (*data)->height_window)))
 		error_intalis(data);
 	castAllRays(data);
 	draw_minimap(data);
+	draw_centered_image(*data, texture);
 	if (mlx_image_to_window((*data)->mlx_ptr, (*data)->img, 0, 0) == -1)
 		error_intalis(data);
+}
+void draw_centered_image(t_config *data, mlx_texture_t *texture)
+{
+    int x, y;
+    int img_width = texture->width;
+    int img_height = texture->height;
+    int win_width = data->width_window;
+    int win_height = data->height_window;
+    int start_x = (win_width - img_width) / 2;
+    int start_y = win_height - img_height; // Centré verticalement
+
+    uint32_t *arr = (uint32_t *)texture->pixels;
+    for (y = 0; y < img_height; y++) {
+        for (x = 0; x < img_width; x++) {
+            int texture_x = x;
+            int texture_y = y;
+            uint32_t color = arr[texture_y * texture->width + texture_x];
+            if ((color & 0xFF000000) != 0)
+			{
+                mlx_put_pixel(data->img, start_x + x, start_y + y, reverse_bytes(color));
+            }
+        }
+    }
 }

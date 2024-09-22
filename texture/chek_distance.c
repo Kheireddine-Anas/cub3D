@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:37:07 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/17 12:01:38 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/19 11:16:27 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_intersection(t_config *data, double xintercept, double Hintercept)
 	if (mapGridIndexX < 0 || mapGridIndexX >= data->map->map_width
 		|| mapGridIndexY < 0 || mapGridIndexY >= data->map->map_height)
 		return (0);
-	if (data->map->map_buffer[mapGridIndexY][mapGridIndexX] == '1' || data->map->map_buffer[mapGridIndexY][mapGridIndexX] == 'P')
+	if (data->map->map_buffer[mapGridIndexY][mapGridIndexX] == '1' || data->map->map_buffer[mapGridIndexY][mapGridIndexX] == 'P' || data->map->map_buffer[mapGridIndexY][mapGridIndexX] == '4' ||data->map->map_buffer[mapGridIndexY][mapGridIndexX] == 'K')
 		return (0);
 	return (1);
 }
