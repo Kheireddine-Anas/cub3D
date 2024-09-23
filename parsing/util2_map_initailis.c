@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:42:38 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/08/30 12:22:27 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/22 18:16:01 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char	*map_info(t_config **data)
 		}
 		else if (ft_strlen(line) != 2 && (line[0] != '\n' && line[1] != '\0'))
 		{
+			ft_putstr_fd("cd", 2);
 			ft_putstr_fd("invalid map", 2);
 			exit(1);
 		}

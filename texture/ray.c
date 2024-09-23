@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:33:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/17 13:12:50 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/23 15:43:03 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	castAllRays(t_config **data)
 	while (ray < (*data)->width_window)
 	{
 		(*data)->rays[ray].index = ray;
-		dis_horizontal = check_horizontal(data, (*data)->ray.ray_ngl, ray);
-		dis_vertical = check_vertical(data, (*data)->ray.ray_ngl, ray);
+		dis_horizontal = check_horizontal(data, ray);
+		dis_vertical = check_vertical(data, ray);
 		if (dis_horizontal <= dis_vertical)
 		{
 			(*data)->ray.flag = 1;
@@ -118,5 +118,4 @@ void	chek_door(t_config **data)
 		}
 		i++;
 	}
-	// free((*data)->rays);
 }

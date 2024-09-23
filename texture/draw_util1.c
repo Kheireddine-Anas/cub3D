@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:22:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/15 10:25:00 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/23 13:21:07 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,16 @@ void	free_doube_eraay(char **str)
 		i++;
 	}
 	free(str);
+}
+void	destroy_data(t_config **data)
+{
+	free_doube_eraay((*data)->map->map_buffer);
+	free((*data)->map->north_texture);
+	free((*data)->map->west_texture);
+	free((*data)->map->south_texture);
+	free((*data)->map->east_texture);
+	free((*data)->map->floor_color);
+	free((*data)->map->ceiling_color);
+	free((*data)->map);
+	free(*data);
 }

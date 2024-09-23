@@ -17,7 +17,9 @@
 		"float.h": "c",
 		"chrono": "c",
 		"string.h": "c",
-		"get_next_line.h": "c"
+		"get_next_line.h": "c",
+		"__tree": "c",
+		"map": "c"
 	},
 	"github.copilot.advanced": {
 		

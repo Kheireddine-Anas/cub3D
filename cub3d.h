@@ -45,6 +45,33 @@ typedef struct s_map
 	char		*floor_color;
 	char		*ceiling_color;
 }		t_map;
+typedef struct s_chek_orizental
+{
+	int isRayFacingDown;
+    int isRayFacingUp;
+    int isRayFacingRight;
+    int isRayFacingLeft;
+    double xintercept;
+    double Hintercept;
+    double xstep;
+    double ystep;
+	double xToCheck;
+    double yToCheck;
+}	t_chek_orizental;
+
+typedef struct s_chek_vertical
+{
+	int isRayFacingDown;
+    int isRayFacingUp;
+    int isRayFacingRight;
+    int isRayFacingLeft;
+    double Vintercept;
+    double yintercept;
+    double xstep;
+    double ystep;
+	double xToCheck;
+    double yToCheck;
+}t_chek_chek_vertical;
 typedef struct s_ray
 {
 	int		index;
@@ -86,6 +113,7 @@ typedef struct s_config
 	double				move_x;
 	double				move_y;
 	mlx_texture_t	*texture_or;
+	mlx_texture_t	*texture_toush;
 	mlx_texture_t	*texture_ver;
 	mlx_texture_t	*texture_open_dor;
 	mlx_texture_t	*texture_close_dor;
@@ -102,42 +130,49 @@ typedef struct s_config
 	t_player	player;
 	t_ray		ray;
 	t_ray		*rays;
+	t_chek_orizental chek_orizental;
+	t_chek_chek_vertical chek_vertical;
 	int flag;
 	int dist;
 	int strat_x;
 	int strat_y;
 	int end_x;
+	int f;
 	int end_y;
 }		t_config;
-void draw_image_at_position(t_config *data, mlx_texture_t *texture, int pos_x, int pos_y);
-void	draw_update(t_config **data, mlx_texture_t *texture);
-void	control_mousse(t_config	**data);
-void	draw(t_config **data, mlx_texture_t *texture);
-void	free_doube_eraay(char **str);
-void 	draw_card(t_config *data);
-void	destroy_data(t_config **data);
-void	fontion_mlx_and_draw(t_config **data);
-void	map_inistialisation(t_config **data);
-void	chek_argument_and_extention(int err, char *map_name);
-void	struct_instialisation(t_config **data, char *map_name);
-void	get_height_map(t_config **data);
-void	free_double_array(char **str);
-char	*delet_newlin(char *str);
-int		open_map(t_config **data);
-void	error_intalis(t_config ** data);
-int		close_window(t_config **data);
-void	calcul_size(t_config **data);
-void	draw_square(t_config **data, int x, int y, int color);
-void draw_square_player(t_config **data, int x, int y, int color);
-void	castAllRays(t_config **data);
-void	draw_line(t_config *data, double x0, double y0, double x1, double y1,
-		int color);
-double	check_vertical(t_config **data, double rayAngle, int i);
-double	check_horizontal(t_config **data, double rayAngle, int i);
-double	normalizeAngle(double angle);
-double	distanceBetweenPoints(double x1, double y1, double x2, double y2);
-void render_wall(t_config **data, int ray, double distance,  double angle);
-void	chek_door(t_config **data);
-void	draw_centered_image(t_config *data, mlx_texture_t *texture);
-int	reverse_bytes(int c);
+int				check_intersection(t_config *data, double xintercept, double Hintercept);
+void			draw_minimap(t_config **data);
+void			my_mlx_pixel_put(t_config *data, double x, double y, int color);
+mlx_texture_t	*get_texture_bonus(t_config *mlx, int flag);
+void			draw_floor_ceiling(t_config *data, int ray, int top_pix, int min_pix);
+void			draw_enter(t_config *data, mlx_texture_t *texture);
+void			draw_update(t_config **data, mlx_texture_t *texture);
+void			control_mousse(t_config	**data);
+void			draw(t_config **data, mlx_texture_t *texture);
+void			free_doube_eraay(char **str);
+void 			draw_card(t_config *data);
+void			destroy_data(t_config **data);
+void			fontion_mlx_and_draw(t_config **data);
+void			map_inistialisation(t_config **data);
+void			chek_argument_and_extention(int err, char *map_name);
+void			struct_instialisation(t_config **data, char *map_name);
+void			get_height_map(t_config **data);
+void			free_double_array(char **str);
+char			*delet_newlin(char *str);
+int				open_map(t_config **data);
+void			error_intalis(t_config ** data);
+int				close_window(t_config **data);
+void			draw_square(t_config **data, int x, int y, int color);
+void 			draw_square_player(t_config **data, int x, int y, int color);
+void			castAllRays(t_config **data);
+void			draw_line(t_config *data, double x0, double y0, double x1, double y1,
+				int color);
+double			check_vertical(t_config **data, int i);
+double			check_horizontal(t_config **data, int i);
+double			normalizeAngle(double angle);
+double			distanceBetweenPoints(double x1, double y1, double x2, double y2);
+void 			render_wall(t_config **data, int ray, double distance,  double angle);
+void			chek_door(t_config **data);
+void			draw_centered_image(t_config *data, mlx_texture_t *texture);
+int				reverse_bytes(int c);
 #endif

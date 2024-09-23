@@ -1,5 +1,5 @@
 SRCS =	main.c getNextLine/get_next_line_utils.c getNextLine/get_next_line.c parsing/util1_chek_and_initialis.c parsing/util2_map_initailis.c texture/draw.c texture/control_kebord.c\
-		texture/draw_util1.c  texture/ray.c texture/rander_wall.c texture/chek_distance.c 
+		texture/draw_util1.c  texture/ray.c texture/rander_wall.c texture/chek_distance_horizental.c  texture/util_rander_wal.c texture/draw_mini_map.c texture/chek_distance_vertical.c
 
 OBJS			= $(SRCS:.c=.o)
 

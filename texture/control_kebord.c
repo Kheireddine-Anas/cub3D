@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:49:12 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/18 17:29:42 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/23 12:17:16 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,37 @@ void	rotate_player(t_config **data, int i)
 		if ((*data)->player.angle + (*data)->mouv_camera_left < 0)
 			(*data)->mouv_camera_left += 2 * M_PI;
 	}
+}
+
+int	open_close_door(t_config **data)
+{
+	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_O))
+	{
+		chek_door(data);
+		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
+			return(1);
+		else if ((*data)->dor_y != 0 && (*data)->dor_x != (*data)->map->map_width -1 && (*data)->dor_y != (*data)->map->map_height -1)
+		{
+			(*data)->map->map_buffer[(*data)->dor_y][(*data)->dor_x] = '4';
+			mlx_delete_image((*data)->mlx_ptr, (*data)->img);
+			draw_update(data, (*data)->texture_r);
+		}
+		return (1);
+	}
+	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_C))
+	{
+		chek_door(data);
+		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
+			return (1);
+		else if ((*data)->dor_y != 0 && (*data)->dor_x != (*data)->map->map_width -1 && (*data)->dor_y != (*data)->map->map_height -1)
+		{
+			(*data)->map->map_buffer[(*data)->dor_y][(*data)->dor_x] = 'P';
+			mlx_delete_image((*data)->mlx_ptr, (*data)->img);
+			draw_update(data, (*data)->texture_r);
+		}
+		return (1);
+	}
+	return (0);
 }
 
 void	move_player(t_config **data)
@@ -68,6 +99,9 @@ void	hook(void *ml)
 	double new_y;
 	data = ml;
 	int pid;
+
+	old_x = ((*data)->player.x + (*data)->move_x) / (*data)->size;
+	old_y = ((*data)->player.y + (*data)->move_y) / (*data)->size;
 	control_mousse(data);
 	if (mlx_is_mouse_down((*data)->mlx_ptr, MLX_MOUSE_BUTTON_LEFT))
 	{
@@ -75,49 +109,26 @@ void	hook(void *ml)
 		if (pid == 0)
 		{
 			system("afplay textures/music_gunshot.mp3");
+			usleep(100000);
+			exit(0);
 		}
 		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
 		draw_update(data, (*data)->texture_pa);
+		draw_enter(*data, (*data)->texture_toush);
 		return;
 		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
 		draw_update(data, (*data)->texture_r);
 		return;
 	}
-	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_O))
-	{
-		chek_door(data);
-		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
-			return ;
-		if ((*data)->dor_y != 0 && (*data)->dor_x != (*data)->map->map_width -1 && (*data)->dor_y != (*data)->map->map_height -1)
-		{
-			(*data)->map->map_buffer[(*data)->dor_y][(*data)->dor_x] = '4';
-			mlx_delete_image((*data)->mlx_ptr, (*data)->img);
-			draw_update(data, (*data)->texture_r);
-		}
-		return ;
-	}
-	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_C))
-	{
-		chek_door(data);
-		if ((*data)->dor_x == -1 && (*data)->dor_y == -1)
-			return ;
-		if ((*data)->dor_y != 0 && (*data)->dor_x != (*data)->map->map_width -1 && (*data)->dor_y != (*data)->map->map_height -1)
-		{
-			(*data)->map->map_buffer[(*data)->dor_y][(*data)->dor_x] = 'P';
-			mlx_delete_image((*data)->mlx_ptr, (*data)->img);
-			draw_update(data, (*data)->texture_r);
-		}
-		return ;
-	}
-	if (mlx_is_key_down((*data)->mlx_ptr, 256)) // exit the game
+	else if (open_close_door(data) == 1)
+		return;
+	else if (mlx_is_key_down((*data)->mlx_ptr, 256)) // exit the game
 		close_window(data);
-	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_RIGHT)) // rotate right
+	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_RIGHT)) // rotate right
 		rotate_player(data, 1);
-	if ( mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_LEFT)) // rotate left
+	else if ( mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_LEFT)) // rotate left
 		rotate_player(data, 0);
-	old_x = ((*data)->player.x + (*data)->move_x) / (*data)->size;
-	old_y = ((*data)->player.y + (*data)->move_y) / (*data)->size;
-	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_W)|| mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_UP))
+	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_W)|| mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_UP))
 	{
 		new_x = ((*data)->player.x + (*data)->move_x + cos((*data)->player.angle
 					+ (*data)->mouv_camera_left) * PLAYER_SPEED)
@@ -137,7 +148,7 @@ void	hook(void *ml)
 					+ (*data)->mouv_camera_left) * PLAYER_SPEED;
 		}
 	}
-	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_S)|| mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_DOWN)) // move down
+	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_S)|| mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_DOWN)) // move down
 	{
 		new_x = ((*data)->player.x + (*data)->move_x - cos((*data)->player.angle
 					+ (*data)->mouv_camera_left) * PLAYER_SPEED)
@@ -157,7 +168,7 @@ void	hook(void *ml)
 					+ (*data)->mouv_camera_left) * PLAYER_SPEED;	
 		}
 	}
-	if (mlx_is_key_down((*data)->mlx_ptr,MLX_KEY_A))
+	else if (mlx_is_key_down((*data)->mlx_ptr,MLX_KEY_A))
 	{
 		new_x = ((*data)->player.x + (*data)->move_x + sin((*data)->player.angle
 					+ (*data)->mouv_camera_left) * PLAYER_SPEED)
@@ -177,7 +188,7 @@ void	hook(void *ml)
 					+ (*data)->mouv_camera_left) * PLAYER_SPEED;
 		}
 	}
-	if ( mlx_is_key_down((*data)->mlx_ptr,MLX_KEY_D)) // move down
+	else if ( mlx_is_key_down((*data)->mlx_ptr,MLX_KEY_D)) // move down
 	{
 		new_x = ((*data)->player.x + (*data)->move_x - sin((*data)->player.angle
 					+ (*data)->mouv_camera_left) * PLAYER_SPEED)
