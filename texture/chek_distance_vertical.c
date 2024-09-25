@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:37:07 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/23 16:00:56 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:25:18 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ double check_vertical(t_config **data, int i)
 {
     initialize_variables_vertical(data);
     calculate_intercepts_and_steps_vertical(data);
-    while ((*data)->chek_vertical.Vintercept >= 0 && (*data)->chek_vertical.Vintercept <= (*data)->width_window &&
-           (*data)->chek_vertical.yintercept >= 0 && (*data)->chek_vertical.yintercept <= (*data)->height_window)
+    while ((*data)->chek_vertical.Vintercept >= 0 && (*data)->chek_vertical.Vintercept <= ((*data)->map->map_width * size_)&&
+           (*data)->chek_vertical.yintercept >= 0 && (*data)->chek_vertical.yintercept  <= ((*data)->map->map_height * size_) )
     {
         if ((*data)->chek_vertical.isRayFacingLeft)
             (*data)->chek_vertical.xToCheck = (*data)->chek_vertical.Vintercept - 1;

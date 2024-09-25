@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:06:49 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/23 13:20:14 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:13:30 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 		y_o = 0;
 	while (top_pix < min_pix)
 	{
+		if(top_pix > 0 && top_pix < mlx->height_window)
 		mlx_put_pixel(mlx->img, mlx->ray.index, top_pix, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
 		y_o += y_step;
 		top_pix++;

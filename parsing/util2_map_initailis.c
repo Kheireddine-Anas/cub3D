@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:42:38 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/22 18:16:01 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:26:02 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ void	map_inistialisation(t_config **data)
 	line = map_info(data);
 	chekeinfo(data);
 	(*data)->map->map_width = ft_strlen(line);
+	(*data)->map->map_width *= size_;
 	while (1)
 	{
 		if (!line)

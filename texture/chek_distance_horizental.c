@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:37:07 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/23 17:09:53 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/25 16:26:25 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ double check_horizontal(t_config **data, int i)
 {
 	initialize_variables(data);
 	calculate_intercepts_and_steps(data);
-	while ((*data)->chek_orizental.xintercept >= 0 && (*data)->chek_orizental.xintercept <= (*data)->width_window &&
-		   (*data)->chek_orizental.Hintercept >= 0 && (*data)->chek_orizental.Hintercept <= (*data)->height_window)
+	while ((*data)->chek_orizental.xintercept >= 0 && (*data)->chek_orizental.xintercept <= ((*data)->map->map_width * size_) &&
+		   (*data)->chek_orizental.Hintercept >= 0 && (*data)->chek_orizental.Hintercept  <= ((*data)->map->map_height * size_))
 	{
 		(*data)->chek_orizental.xToCheck = (*data)->chek_orizental.xintercept;
 		if ((*data)->chek_orizental.isRayFacingUp)

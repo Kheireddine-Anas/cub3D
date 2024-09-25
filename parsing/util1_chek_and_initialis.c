@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:40:58 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/23 12:30:19 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/24 12:35:34 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	struct_instialisation(t_config **data, char *map_name)
 	(*data)->height_window = 1000;
 	(*data)->texture_or = mlx_load_png("textures/seamless_stone.png");
 	(*data)->texture_ver = mlx_load_png("textures/seamless_stone.png");
-	(*data)->texture_close_dor = mlx_load_png("textures/imgbin_fortified-gateway-castle-door-png.png");
-	(*data)->texture_open_dor = mlx_load_png("textures/open_dor.png");
+	(*data)->texture_close_dor = mlx_load_png("textures/close__door.png");
+	(*data)->texture_open_dor = mlx_load_png("textures/open__dor.png");
 	(*data)->texture_r = mlx_load_png("textures/1.png");
 	(*data)->texture_pa = mlx_load_png("textures/2.png");
 	(*data)->texture_s = mlx_load_png("sprite/1.png");

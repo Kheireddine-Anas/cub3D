@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:33:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/23 15:43:03 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/25 15:51:07 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	castAllRays(t_config **data)
 	(*data)->ray.ray_ngl = ((*data)->player.angle + (*data)->mouv_camera_left)
 		- ((*data)->player.fov_rd / 2);
 	(*data)->rays[ray].ray_ngl = (*data)->ray.ray_ngl;
-	while (ray < (*data)->width_window)
+	while (ray <= (*data)->width_window)
 	{
 		(*data)->rays[ray].index = ray;
 		dis_horizontal = check_horizontal(data, ray);
