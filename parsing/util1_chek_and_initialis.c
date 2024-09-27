@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 14:40:58 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/25 17:05:48 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/27 11:49:55 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	struct_instialisation(t_config **data, char *map_name)
 	(*data)->player.x = 0;
 	(*data)->player.y = 0;
 	(*data)->player.angle = 0;
-	(*data)->move_x = 0;
-	(*data)->move_y = 0;
+	(*data)->move_x = 1;
+	(*data)->move_y = 1;
 	(*data)->f = 0;
 	(*data)->size = 0;
 	(*data)->dor_x = -1;

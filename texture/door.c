@@ -6,13 +6,13 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 14:00:30 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/26 14:05:02 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/27 11:25:40 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	chke_ori(t_config **data)
+int	chke_ori(t_config **data, int i)
 {
 	int	map_y;
 	int	map_x;
@@ -20,11 +20,11 @@ int	chke_ori(t_config **data)
 	map_y = (int)((*data)->rays[i].horiz_y / TILE_SIZE);
 	map_x = (int)((*data)->rays[i].horiz_x / TILE_SIZE);
 	if ((*data)->rays[i].distance <= 50
-            && map_y >= 0 && map_y < (*data)->map->map_height
-            && (*data)->map->map_buffer[map_y]
-            && map_x >= 0 && map_x < (*data)->map->map_width
-            && ((*data)->map->map_buffer[map_y][map_x] == 'P'
-		    || (*data)->map->map_buffer[map_y][map_x] == '4'))
+		&& map_y >= 0 && map_y < (*data)->map->map_height
+		&& (*data)->map->map_buffer[map_y]
+		&& map_x >= 0 && map_x < (*data)->map->map_width
+		&& ((*data)->map->map_buffer[map_y][map_x] == 'P'
+		|| (*data)->map->map_buffer[map_y][map_x] == '4'))
 	{
 		(*data)->dor_x = map_x;
 		(*data)->dor_y = map_y;
@@ -33,7 +33,7 @@ int	chke_ori(t_config **data)
 	return (0);
 }
 
-int chek_ver(t_config **data)
+int	chek_ver(t_config **data, int i)
 {
 	int	map_y;
 	int	map_x;
@@ -41,23 +41,22 @@ int chek_ver(t_config **data)
 	map_y = (int)((*data)->rays[i].vert_y / TILE_SIZE);
 	map_x = (int)((*data)->rays[i].vert_x / TILE_SIZE);
 	if ((*data)->rays[i].distance <= 50
-        && map_y >= 0 && map_y < (*data)->map->map_height
-        && (*data)->map->map_buffer[map_y]
-        && map_x >= 0 && map_x < (*data)->map->map_width
-        && ((*data)->map->map_buffer[map_y][map_x] == 'P'
+		&& map_y >= 0 && map_y < (*data)->map->map_height
+		&& (*data)->map->map_buffer[map_y]
+		&& map_x >= 0 && map_x < (*data)->map->map_width
+		&& ((*data)->map->map_buffer[map_y][map_x] == 'P'
 		|| (*data)->map->map_buffer[map_y][map_x] == '4'))
 	{
 		(*data)->dor_x = map_x;
 		(*data)->dor_y = map_y;
-		return ;
+		return (1);
 	}
+	return (0);
 }
 
 void	chek_door(t_config **data)
 {
 	int	i;
-	int	map_y;
-	int	map_x;
 
 	i = 0;
 	(*data)->dor_x = -1;
@@ -66,12 +65,12 @@ void	chek_door(t_config **data)
 	{
 		if ((*data)->rays[i].flag == 1)
 		{
-			if (chke_ori(data) == 1)
+			if (chke_ori(data, i) == 1)
 				return ;
 		}
 		else
 		{
-			if (chek_ver(data) == 1)
+			if (chek_ver(data, i) == 1)
 				return ;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:33:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/26 14:02:27 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/27 12:24:35 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,6 @@ void	castallrays(t_config **data)
 	double	player_x;
 	double	player_y;
 
-	(*data)->rays = ft_calloc((*data)->width_window, sizeof(t_ray));
-	if (!(*data)->rays)
-	{
-		ft_putstr_fd("Error: Memory allocation failed\n", 2);
-		exit(1);
-	}
 	ray = 0;
 	player_x = (*data)->player.x + (*data)->move_x;
 	player_y = (*data)->player.y + (*data)->move_y;

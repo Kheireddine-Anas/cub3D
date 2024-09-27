@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:22:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/26 11:51:35 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/27 12:23:24 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void	destroy_data(t_config **data)
 	free((*data)->map->east_texture);
 	free((*data)->map->floor_color);
 	free((*data)->map->ceiling_color);
+	free((*data)->rays);
 	free((*data)->map);
 	free(*data);
 }

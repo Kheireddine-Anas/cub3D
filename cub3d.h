@@ -141,6 +141,11 @@ typedef struct s_config
 	int f;
 	int end_y;
 }		t_config;
+void			hook(void *ml);
+void			rotate_player(t_config **data, int i);
+int				open_close_door(t_config **data);
+void			mouve_d(t_config **data, double old_y, double old_x);
+void			shut_(t_config **data);
 mlx_texture_t	*chek_dor_avertical(t_config *mlx);
 mlx_texture_t	*chek_dor_a_ori(t_config *mlx);
 int				check_intersection(t_config *data, double xintercept, double Hintercept);
