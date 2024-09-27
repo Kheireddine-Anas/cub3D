@@ -121,6 +121,7 @@ typedef struct s_config
 	mlx_texture_t	*texture_r;
 	mlx_texture_t	*texture_s;
 	int				sprid_x;
+	double			wall_h;
 	int				sprid_y;
 	int 		size;
 	int			size_mini_map;
@@ -140,6 +141,8 @@ typedef struct s_config
 	int f;
 	int end_y;
 }		t_config;
+mlx_texture_t	*chek_dor_avertical(t_config *mlx);
+mlx_texture_t	*chek_dor_a_ori(t_config *mlx);
 int				check_intersection(t_config *data, double xintercept, double Hintercept);
 void			draw_minimap(t_config **data);
 void			my_mlx_pixel_put(t_config *data, double x, double y, int color);
@@ -164,13 +167,13 @@ void			error_intalis(t_config ** data);
 int				close_window(t_config **data);
 void			draw_square(t_config **data, int x, int y, int color);
 void 			draw_square_player(t_config **data, int x, int y, int color);
-void			castAllRays(t_config **data);
+void			castallrays(t_config **data);
 void			draw_line(t_config *data, double x0, double y0, double x1, double y1,
 				int color);
 double			check_vertical(t_config **data, int i);
 double			check_horizontal(t_config **data, int i);
-double			normalizeAngle(double angle);
-double			distanceBetweenPoints(double x1, double y1, double x2, double y2);
+double			normalizeangle(double angle);
+double			distancebetweenpoints(double x1, double y1, double x2, double y2);
 void 			render_wall(t_config **data, int ray, double distance,  double angle);
 void			chek_door(t_config **data);
 void			draw_centered_image(t_config *data, mlx_texture_t *texture);

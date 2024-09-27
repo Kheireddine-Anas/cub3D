@@ -6,11 +6,34 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:06:49 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/25 16:13:30 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/26 13:54:32 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+mlx_texture_t	*get_texture_bonus(t_config *mlx, int flag)
+{
+	mlx_texture_t	*texture_or;
+	mlx_texture_t	*texture_ver;
+
+	texture_or = chek_dor_a_ori(mlx);
+	texture_ver = chek_dor_avertical(mlx);
+	mlx->ray.ray_ngl = normalizeangle(mlx->ray.ray_ngl);
+	if (flag == 0)
+	{
+		if (texture_ver)
+			return (texture_ver);
+		else if (mlx->ray.ray_ngl > M_PI / 2 && mlx->ray.ray_ngl < 3 
+			* (M_PI / 2))
+			return (mlx->texture_or);
+		else
+			return (mlx->texture_or);
+	}
+	else if (texture_or)
+		return (texture_or);
+	return (NULL);
+}
 
 double	get_x_o(mlx_texture_t *texture, t_config *mlx)
 {
@@ -28,11 +51,12 @@ double	get_x_o(mlx_texture_t *texture, t_config *mlx)
 void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 {
 	double			x_o;
-	double			y_o = 0;
+	double			y_o;
 	uint32_t		*arr;
 	double			y_step;
 	mlx_texture_t	*texture;
-	
+
+	y_o = 0;
 	texture = get_texture_bonus(mlx, mlx->ray.flag);
 	if (!texture)
 		return ;
@@ -44,8 +68,9 @@ void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 		y_o = 0;
 	while (top_pix < min_pix)
 	{
-		if(top_pix > 0 && top_pix < mlx->height_window)
-		mlx_put_pixel(mlx->img, mlx->ray.index, top_pix, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
+		if (top_pix > 0 && top_pix < mlx->height_window)
+			mlx_put_pixel(mlx->img, mlx->ray.index, top_pix,
+				reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
 		y_o += y_step;
 		top_pix++;
 	}
@@ -53,19 +78,20 @@ void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 
 void	render_wall(t_config **data, int ray, double distance, double angle)
 {
-	double wall_h;
-	double min_pix;
-	double top_pix;
-	(void)angle;
+	double	wall_h;
+	double	min_pix;
+	double	top_pix;
 
+	(void)angle;
 	(*data)->ray.index = ray;
-	distance *= cos(normalizeAngle(angle - ((*data)->player.angle
+	distance *= cos(normalizeangle(angle - ((*data)->player.angle
 					+ (*data)->mouv_camera_left)));
 	(*data)->ray.distance = distance;
-	wall_h = ((*data)->size / distance) * (((*data)->width_window / 2) / tan((*data)->player.fov_rd / 2));
-	min_pix = ((*data)->height_window / 2) + (wall_h / 2);                                                
-	top_pix = ((*data)->height_window / 2) - (wall_h / 2);                                                
-	if (min_pix > (*data)->height_window)                                                                
+	wall_h = ((*data)->size / distance) * (((*data)->width_window / 2)
+			/ tan((*data)->player.fov_rd / 2));
+	min_pix = ((*data)->height_window / 2) + (wall_h / 2);
+	top_pix = ((*data)->height_window / 2) - (wall_h / 2);
+	if (min_pix > (*data)->height_window)
 		min_pix = (*data)->height_window;
 	if (top_pix < 0)
 		top_pix = 0;

@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:49:12 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/24 12:05:03 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/09/25 17:50:57 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,26 @@ void	hook(void *ml)
 	}
 	move_player(data);
 }
-
+void animation(mlx_key_data_t keydata, void* param)
+{
+	t_config **data;
+	int pid;
+	data = param;
+	if (keydata.key == MLX_KEY_SPACE)
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			system("afplay textures/music_gunshot.mp3");
+			exit(0);
+		}
+		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
+		draw_update(data, (*data)->texture_pa);
+		draw_enter(*data, (*data)->texture_toush);
+		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
+		draw_update(data, (*data)->texture_r);
+	}
+}
 void control_mousse(t_config	**data)
 {
 	int			delta_x;
@@ -231,6 +250,7 @@ void	fontion_mlx_and_draw(t_config **data)
 {
 	draw(data, (*data)->texture_r);
 	mlx_loop_hook((*data)->mlx_ptr, hook, data);
+	// mlx_key_hook((*data)->mlx_ptr, animation, data);
 	mlx_set_cursor_mode((*data)->mlx_ptr, MLX_MOUSE_HIDDEN);
 }
 
