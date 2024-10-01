@@ -68,9 +68,13 @@ void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 		y_o = 0;
 	while (top_pix < min_pix)
 	{
+	if (reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]) != reverse_bytes(0xFFFFFFFF))
+	{
+		
 		if (top_pix > 0 && top_pix < mlx->height_window)
-			mlx_put_pixel(mlx->img, mlx->ray.index, top_pix,
-				reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
+		mlx_put_pixel(mlx->img, mlx->ray.index, top_pix,
+			reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
+	}
 		y_o += y_step;
 		top_pix++;
 	}

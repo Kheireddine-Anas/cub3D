@@ -36,6 +36,7 @@ void	struct_instialisation(t_config **data, char *map_name)
 	(*data)->map = ft_calloc(1, sizeof(t_config));
 	(*data)->map->north_texture = NULL;
 	(*data)->map->map_width = 0;
+	(*data)->p = 0;
 	(*data)->map->map_height = 0;
 	(*data)->map->south_texture = NULL;
 	(*data)->map->west_texture = NULL;

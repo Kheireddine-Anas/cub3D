@@ -128,6 +128,7 @@ typedef struct s_config
 	int			key;
 	int dor_x;
 	int dor_y;
+	int p;
 	t_player	player;
 	t_ray		ray;
 	t_ray		*rays;

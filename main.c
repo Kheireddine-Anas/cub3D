@@ -40,7 +40,6 @@ int	main(int ac, char **av)
 	chek_argument_and_extention(ac, av[1]);
 	struct_instialisation(&data, av[1]);
 	map_inistialisation(&data);
-	destroy_data(&data);
 	if (!(data->mlx_ptr = mlx_init(data->width_window, data->height_window,
 				"cub_3d", true)))
 		error_intalis(&data);
