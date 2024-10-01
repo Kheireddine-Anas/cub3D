@@ -55,7 +55,7 @@ void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 	uint32_t		*arr;
 	double			y_step;
 	mlx_texture_t	*texture;
-
+   
 	y_o = 0;
 	texture = get_texture_bonus(mlx, mlx->ray.flag);
 	if (!texture)
