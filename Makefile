@@ -8,7 +8,7 @@ CC			= cc
 RM			= rm -f
 CFLAGS		=  -Wall -Wextra -Werror   
 # -fsanitize=address
-MLX_LIB	=   MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/ahamdi/.brew/opt/glfw/lib/"
+MLX_LIB	=   MLX42/build/libmlx42.a -Iinclude -lglfw -L"/Users/ahamdi/goinfre/homebrew/Cellar/glfw/3.4/lib"
 NAME		= cub3D
 LIBFT 		= libft/libft.a
 
