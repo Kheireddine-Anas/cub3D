@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 13:38:31 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/27 12:22:37 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/17 10:57:30 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	while_loop(t_config **data, int i, int j, int player_x)
 	int	player_y;
 
 	player_y = (*data)->player.y + (*data)->move_y;
-	y = i * size_;
+	y = i * SIZE_;
 	if (y > (player_y - 100) && y < (player_y + 100))
 	{
-		x = j * size_;
+		x = j * SIZE_;
 		if ((x > (player_x - 100) && x < (player_x + 100)))
 		{
 			if ((*data)->map->map_buffer[i][j] == '1')
@@ -53,7 +53,7 @@ void	draw_minimap(t_config **data)
 	while ((*data)->map->map_buffer[i])
 	{
 		j = 0;
-		y = i * size_;
+		y = i * SIZE_;
 		while ((*data)->map->map_buffer[i][j])
 		{
 			while_loop(data, i, j, player_x);

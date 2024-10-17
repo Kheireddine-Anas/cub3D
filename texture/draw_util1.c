@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:22:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/27 12:23:24 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/17 10:56:31 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	draw_square(t_config **data, int x, int y, int color)
 	int	y_map;
 
 	i = 0;
-	while (i < size_)
+	while (i < SIZE_)
 	{
 		j = 0;
-		while (j < size_)
+		while (j < SIZE_)
 		{
 			x_map = x + j;
 			y_map = y + i;
