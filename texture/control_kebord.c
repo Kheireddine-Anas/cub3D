@@ -37,7 +37,7 @@ int	condtion(t_config **data)
 		&& (*data)->dor_x != (*data)->map->map_width - 1
 		&& (*data)->dor_y != (*data)->map->map_height - 1)
 	{
-		(*data)->map->map_buffer[(*data)->dor_y][(*data)->dor_x] = 'P';
+		(*data)->map->map_buffer[(*data)->dor_y][(*data)->dor_x] = 'D';
 		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
 		draw_update(data, (*data)->texture_r);
 	}
@@ -77,10 +77,10 @@ void	mouve_d(t_config **data, double old_y, double old_x)
 				+ (*data)->mouv_camera_left) * PLAYER_SPEED) / (*data)->size;
 	if ((*data)->map->map_buffer[(int)old_y]
 		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != '1'
-		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != 'P'
+		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != 'D'
 		&& (*data)->map->map_buffer[(int)new_y]
 		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != '1'
-		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != 'P'
+		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != 'D'
 		&& (*data)->map->map_buffer[(int)new_y][(int)new_x])
 	{
 		(*data)->move_x -= sin((*data)->player.angle

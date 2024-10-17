@@ -23,7 +23,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 void	ft_bzero(void *m, size_t n);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);

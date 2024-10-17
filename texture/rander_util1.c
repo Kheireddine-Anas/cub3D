@@ -56,7 +56,7 @@ mlx_texture_t	*chek_dor_a_ori(t_config *mlx)
 			&& map_y >= 0 && map_y < mlx->map->map_height
 			&& mlx->map->map_buffer[map_y]
 			&& map_x >= 0 && map_x < mlx->map->map_width
-			&& mlx->map->map_buffer[map_y][map_x] == 'P')
+			&& mlx->map->map_buffer[map_y][map_x] == 'D')
 			return (mlx->texture_close_dor);
 		else if (mlx->map->map_buffer
 			&& map_y >= 0 && map_y < mlx->map->map_height
@@ -83,7 +83,7 @@ mlx_texture_t	*chek_dor_avertical(t_config *mlx)
 		&& map_y >= 0 && map_y < mlx->map->map_height
 		&& mlx->map->map_buffer[map_y]
 		&& map_x >= 0 && map_x < mlx->map->map_width
-		&& mlx->map->map_buffer[map_y][map_x] == 'P')
+		&& mlx->map->map_buffer[map_y][map_x] == 'D')
 		return (mlx->texture_close_dor);
 	else if (mlx->map->map_buffer
 		&& map_y >= 0 && map_y < mlx->map->map_height

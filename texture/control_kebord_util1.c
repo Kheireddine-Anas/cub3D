@@ -23,10 +23,10 @@ void	mouve_w(t_config **data, double old_y, double old_x)
 				+ (*data)->mouv_camera_left) * PLAYER_SPEED) / (*data)->size;
 	if ((*data)->map->map_buffer[(int)old_y]
 		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != '1'
-		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != 'P'
+		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != 'D'
 		&& (*data)->map->map_buffer[(int)new_y]
 		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != '1'
-		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != 'P'
+		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != 'D'
 		&& (*data)->map->map_buffer[(int)new_y][(int)new_x])
 	{
 		(*data)->move_x += cos((*data)->player.angle
@@ -47,10 +47,10 @@ void	mouve_s(t_config **data, double old_y, double old_x)
 				+ (*data)->mouv_camera_left) * PLAYER_SPEED) / (*data)->size;
 	if ((*data)->map->map_buffer[(int)old_y]
 		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != '1'
-		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != 'P'
+		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != 'D'
 		&& (*data)->map->map_buffer[(int)new_y]
 		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != '1'
-		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != 'P'
+		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != 'D'
 		&& (*data)->map->map_buffer[(int)new_y][(int)new_x])
 	{
 		(*data)->move_x -= cos((*data)->player.angle
@@ -71,10 +71,10 @@ void	mouve_a(t_config **data, double old_y, double old_x)
 				+ (*data)->mouv_camera_left) * PLAYER_SPEED) / (*data)->size;
 	if ((*data)->map->map_buffer[(int)old_y]
 		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != '1'
-		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != 'P'
+		&& (*data)->map->map_buffer[(int)old_y][(int)new_x] != 'D'
 		&& (*data)->map->map_buffer[(int)new_y]
 		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != '1'
-		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != 'P'
+		&& (*data)->map->map_buffer[(int)new_y][(int)old_x] != 'D'
 		&& (*data)->map->map_buffer[(int)new_y][(int)new_x])
 	{
 		(*data)->move_x += sin((*data)->player.angle

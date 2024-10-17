@@ -23,7 +23,7 @@ int	chke_ori(t_config **data, int i)
 		&& map_y >= 0 && map_y < (*data)->map->map_height
 		&& (*data)->map->map_buffer[map_y]
 		&& map_x >= 0 && map_x < (*data)->map->map_width
-		&& ((*data)->map->map_buffer[map_y][map_x] == 'P'
+		&& ((*data)->map->map_buffer[map_y][map_x] == 'D'
 		|| (*data)->map->map_buffer[map_y][map_x] == '4'))
 	{
 		(*data)->dor_x = map_x;
@@ -44,7 +44,7 @@ int	chek_ver(t_config **data, int i)
 		&& map_y >= 0 && map_y < (*data)->map->map_height
 		&& (*data)->map->map_buffer[map_y]
 		&& map_x >= 0 && map_x < (*data)->map->map_width
-		&& ((*data)->map->map_buffer[map_y][map_x] == 'P'
+		&& ((*data)->map->map_buffer[map_y][map_x] == 'D'
 		|| (*data)->map->map_buffer[map_y][map_x] == '4'))
 	{
 		(*data)->dor_x = map_x;

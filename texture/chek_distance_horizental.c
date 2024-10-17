@@ -23,7 +23,7 @@ int	check_intersection(t_config *data, double xintercept, double Hintercept)
 		|| mapgridindex_y < 0 || mapgridindex_y >= data->map->map_height)
 		return (0);
 	if (data->map->map_buffer[mapgridindex_y][mapgridindex_x] == '1'
-		|| data->map->map_buffer[mapgridindex_y][mapgridindex_x] == 'P'
+		|| data->map->map_buffer[mapgridindex_y][mapgridindex_x] == 'D'
 		|| data->map->map_buffer[mapgridindex_y][mapgridindex_x] == '4')
 		return (0);
 	return (1);

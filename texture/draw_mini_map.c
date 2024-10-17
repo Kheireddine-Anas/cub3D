@@ -26,8 +26,9 @@ void	while_loop(t_config **data, int i, int j, int player_x)
 		if ((x > (player_x - 100) && x < (player_x + 100)))
 		{
 			if ((*data)->map->map_buffer[i][j] == '1')
-				draw_square(data, x - (player_x - 100), y - (player_y - 100),WHI);
-			else if ((*data)->map->map_buffer[i][j] == 'P')
+				draw_square(data, x - (player_x - 100),
+					y - (player_y - 100), WHI);
+			else if ((*data)->map->map_buffer[i][j] == 'D')
 				draw_square(data, x - (player_x - 100), y - (player_y - 100),
 					BLU);
 			else
@@ -60,7 +61,9 @@ void	draw_minimap(t_config **data)
 		}
 		i++;
 	}
-	draw_square_player(data, ((*data)->player.x / 2) - (((*data)->player.x / 2) - 100), ((*data)->player.y / 2) - (((*data)->player.y / 2) - 100), ORNG);
+	draw_square_player(data, ((*data)->player.x / 2) - 
+		(((*data)->player.x / 2) - 100), 
+		((*data)->player.y / 2) - (((*data)->player.y / 2) - 100), ORNG);
 }
 
 void	draw_centered_image(t_config *data, mlx_texture_t *texture)
@@ -131,7 +134,6 @@ int	close_window(t_config **data)
 	if ((*data)->mlx_ptr)
 		mlx_close_window((*data)->mlx_ptr);
 	ft_putstr_fd(" close window\n", 1);
-	
 	destroy_data(data);
 	exit(0);
 }
