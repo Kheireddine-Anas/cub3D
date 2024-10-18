@@ -1,7 +1,6 @@
 NAME = cub3d
 
-SRC =	main.c get_next_line_utils.c get_next_line.c checkers.c checker1.c ft_split.c spliter.c utils.c utils1.c utils2.c
-
+SRC =	
 CFLAGS = -Wall -Wextra -Werror
 # CFLAGS = -Wall -Wextra -Werror -Imlx
 
@@ -31,4 +30,4 @@ clean :
 fclean : clean
 	rm -rf $(NAME) $(NAME_BONUS)
 
-re : fclean all
+re : fclean allmain.c get_next_line_utils.c get_next_line.c checkers.c checker1.c ft_split.c spliter.c utils.c utils1.c utils2.c

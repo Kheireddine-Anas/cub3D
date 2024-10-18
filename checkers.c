@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 08:28:16 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/16 08:54:47 by akheired         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:40:00 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	map_data_check(t_config *config)
 		if (check_config(line, &config) && config->config_count < 6)
 		{
 			printf("Error\nInvalide Config\n");
-			exit(33);
+			exit(1);
 		}
 		if (!ft_strcmp(line[0], "F") || !ft_strcmp(line[0], "C"))
 			init_fc(config, config->map[i], i, line[0]);
@@ -114,4 +114,5 @@ void	check_valid_map(t_config *config)
 				check_space(config, i, j);
 		}
 	}
+	check_doors(config->cp_map);
 }

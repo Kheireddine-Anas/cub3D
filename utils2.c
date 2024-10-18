@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 09:03:26 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/16 09:11:44 by akheired         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:40:17 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,28 @@ int	row(char *line)
 	while (line[--i] != ' ')
 		;
 	return (i + 1);
+}
+
+void	check_doors(char **map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j] != '\n' && map[i][j] != '\0')
+		{
+			if (map[i][j] == 'D')
+			{
+				if (map[i][j - 1] != '1' || map[i][j + 1] != '1')
+				{
+					printf("Error\nCheck Doors\n");
+					exit (1);
+				}
+			}
+		}
+	}
 }
