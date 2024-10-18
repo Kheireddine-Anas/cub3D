@@ -6,7 +6,7 @@
 /*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 08:26:09 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/16 09:05:54 by akheired         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:40:47 by akheired         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,7 @@ void	init_fc(t_config *config, char *line, int i, char *fc_config);
 int		check_chars(char *line);
 void	isolate_map_area(t_config *config);
 int		row(char *line);
+void	valid_paths(t_config *map);
+void	check_doors(char **map);
 
 #endif

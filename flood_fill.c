@@ -4,7 +4,7 @@
 
 void flood_fill(t_config *map, int x, int y)
 {
-	if (x < 0 || y < 0 || x >= map->map_size || y >= len(map->cp_map[x]) || 
+	if (x < 0 || y < 0 || x >= map->map_size || y >= ft_strlen(map->cp_map[x]) || 
 		map->cp_map[x][y] == '1' || map->cp_map[x][y] == ' ' || map->cp_map[x][y] == 'V')
 		return ;
 	map->cp_map[x][y] = 'V';
@@ -36,9 +36,9 @@ void valid_paths(t_config *map)
 		j = -1;
 		while (map->cp_map[i][++j] != '\n' && map->cp_map[i][j] != '\0')
 		{
-			if (map->cp_map[i][j] == 'COINS')
+			if (map->cp_map[i][j] == 'C')
 			{
-				ft_error("Error\nUnreachable Coin!\n");
+				printf("Error\nUnreachable Coin!\n");
 				return;
 			}
 		}
