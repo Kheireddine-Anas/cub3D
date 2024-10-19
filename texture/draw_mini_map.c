@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 13:38:31 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/17 10:57:30 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/18 20:36:37 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,13 @@ int	close_window(t_config **data)
 {
 	mlx_delete_texture((*data)->texture_close_dor);
 	mlx_delete_texture((*data)->texture_open_dor);
-	mlx_delete_texture((*data)->texture_or);
 	mlx_delete_texture((*data)->texture_toush);
-	mlx_delete_texture((*data)->texture_ver);
+	mlx_delete_texture((*data)->texture_east);
+	mlx_delete_texture((*data)->texture_west);
+	mlx_delete_texture((*data)->texture_north);
+	mlx_delete_texture((*data)->texture_south);
 	mlx_delete_texture((*data)->texture_pa);
 	mlx_delete_texture((*data)->texture_r);
-	mlx_delete_texture((*data)->texture_s);
 	if ((*data)->img)
 		mlx_delete_image((*data)->mlx_ptr, (*data)->img);
 	if ((*data)->mlx_ptr)

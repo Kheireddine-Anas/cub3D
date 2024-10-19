@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 09:00:19 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/17 14:15:12 by akheired         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:19:13 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	skip_line(char *line)
 {

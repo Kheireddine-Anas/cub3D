@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:38:25 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/26 13:14:26 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/19 12:07:14 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	draw_floor_ceiling(t_config *data, int ray, int top_pix, int min_pix)
 
 	i = 0;
 	while (i < top_pix)
-		my_mlx_pixel_put(data, ray, i++, 0x89CFF3FF);
+		my_mlx_pixel_put(data, ray, i++, data->ceiling_color);
 	i = min_pix;
 	while (i < data->height_window)
-		my_mlx_pixel_put(data, ray, i++, GREN);
+		my_mlx_pixel_put(data, ray, i++, data->floor_color);
 }
 
 mlx_texture_t	*chek_dor_a_ori(t_config *mlx)
@@ -65,9 +65,9 @@ mlx_texture_t	*chek_dor_a_ori(t_config *mlx)
 			&& mlx->map->map_buffer[map_y][map_x] == '4')
 			return (mlx->texture_open_dor);
 		if (mlx->ray.ray_ngl > 0 && mlx->ray.ray_ngl < M_PI)
-			return (mlx->texture_ver);
+			return (mlx->texture_north);
 		else
-			return (mlx->texture_ver);
+			return (mlx->texture_south);
 	}
 	return (NULL);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 09:03:26 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/18 11:40:17 by akheired         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:45:20 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	isolate_map_area(t_config *config)
 {
@@ -19,18 +19,19 @@ void	isolate_map_area(t_config *config)
 
 	i = -1;
 	j = -1;
-	while (config->map[++i])
-		if (check_map_row_start(config->map[i]))
+	while (config->maps[++i])
+		if (check_map_row_start(config->maps[i]))
 			break ;
-	while (config->map[--config->map_height] && config->map_height > i)
-		if (check_map_row_start(config->map[config->map_height]))
+	while (config->maps[--config->map->map_height] 
+		&& config->map->map_height > i)
+		if (check_map_row_start(config->maps[config->map->map_height]))
 			break ;
-	config->map_size = config->map_height - i + 1;
-	config->cp_map = ft_calloc(config->map_size + 1, sizeof(char *));
-	while (++j < config->map_height - i + 1)
-		config->cp_map[j] = ft_strdup(config->map[i + j]);
-	config->cp_map[j] = NULL;
-	free_line(config->map);
+	config->map_size = config->map->map_height - i + 1;
+	config->map->map_buffer = ft_calloc(config->map_size + 1, sizeof(char *));
+	while (++j < config->map->map_height - i + 1)
+		config->map->map_buffer[j] = ft_strdup(config->maps[i + j]);
+	config->map->map_buffer[j] = NULL;
+	free_line(config->maps);
 }
 
 int	row(char *line)

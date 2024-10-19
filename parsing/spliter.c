@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   spliter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 16:29:18 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/15 18:31:01 by akheired         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:48:49 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static size_t	count_word(const char *str)
 {
@@ -86,4 +86,10 @@ char	**spliter(char *str)
 	}
 	strings[i] = NULL;
 	return (strings);
+}
+
+void	errr(void)
+{
+	printf("Error\nNo more one player\n");
+	exit(1);
 }

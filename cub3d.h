@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:48:09 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/17 11:46:09 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/19 19:49:13 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <stdlib.h>
+# include <stdio.h>
 # include "getNextLine/get_next_line.h"
 # include "MLX42/include/MLX42/MLX42.h"
 # include <math.h>
@@ -41,7 +42,6 @@
 
 typedef struct s_map
 {
-	int			fd;
 	char		**map_buffer;
 	int			map_width;
 	int			map_height;
@@ -49,8 +49,8 @@ typedef struct s_map
 	char		*south_texture;
 	char		*west_texture;
 	char		*east_texture;
-	char		*floor_color;
-	char		*ceiling_color;
+	int			*floor_color;
+	int			*ceiling_color;
 }		t_map;
 typedef struct s_chek_orizental
 {
@@ -102,54 +102,51 @@ typedef struct s_palyer
 typedef struct s_config
 {
 	t_map					*map;
-	char					*map_name;
-	int						fd_map;
+	char					**maps;
 	int						counter;
 	void					*img;
-	char					*addr;
-	int						bits_per_pixel;
-	int						line_length;
-	int						endian;
+	int						fd_map;
 	void					*mlx_ptr;
-	void					*win_ptr;
-	int						width;
-	int						height;
 	int						width_window;
 	int						height_window;
 	double					mouv_camera_left;
 	double					move_x;
 	double					move_y;
-	mlx_texture_t			*texture_or;
+	mlx_texture_t			*texture_north;
+	mlx_texture_t			*texture_south;
+	mlx_texture_t			*texture_west;
+	mlx_texture_t			*texture_east;
 	mlx_texture_t			*texture_toush;
-	mlx_texture_t			*texture_ver;
 	mlx_texture_t			*texture_open_dor;
 	mlx_texture_t			*texture_close_dor;
 	mlx_texture_t			*texture_pa;
 	mlx_texture_t			*texture_r;
-	mlx_texture_t			*texture_s;
-	int						sprid_x;
 	double					wall_h;
-	int						sprid_y;
 	int						size;
-	int						size_mini_map;
-	int						key;
 	int						dor_x;
 	int						dor_y;
-	int						p;
 	t_player				player;
 	t_ray					ray;
+	int						player_direction;
+	int						p_d_count;
 	t_ray					*rays;
+	unsigned int			floor_color;
+	unsigned int			ceiling_color;
 	t_chek_orizental		chek_orizental;
 	t_chek_chek_vertical	chek_vertical;
 	int						flag;
 	int						dist;
-	int						strat_x;
-	int						strat_y;
 	int						end_x;
 	int						f;
 	int						end_y;
+	char					*path;
+	int						config_count;
+	int						map_size;
 }		t_config;
 void			hook(void *ml);
+void			errr(void);
+void			determine_engle(t_config **data, int i, int j);
+unsigned int	rgb_to_hex(int r, int g, int b);
 void			rotate_player(t_config **data, int i);
 int				open_close_door(t_config **data);
 void			mouve_d(t_config **data, double old_y, double old_x);
@@ -171,9 +168,7 @@ void			free_doube_eraay(char **str);
 void			draw_card(t_config *data);
 void			destroy_data(t_config **data);
 void			fontion_mlx_and_draw(t_config **data);
-void			map_inistialisation(t_config **data);
 void			chek_argument_and_extention(int err, char *map_name);
-void			struct_instialisation(t_config **data, char *map_name);
 void			get_height_map(t_config **data);
 void			free_double_array(char **str);
 char			*delet_newlin(char *str);
@@ -193,4 +188,29 @@ void			render_wall(t_config **data, int ray, double distance,
 void			chek_door(t_config **data);
 void			draw_centered_image(t_config *data, mlx_texture_t *texture);
 int				reverse_bytes(int c);
+char			**spliter(char *str);
+int				*init_color(char **tab);
+void			check_extenstion(char *exe, int ac);
+int				find_new_line(char *str);
+char			*ft_first_line(char *first_str);
+char			*ft_last_line(char *last_str);
+void			check_colors(t_config *config);
+void			check_extenstion(char *exe, int ac);
+int				check_config(char **line, t_config **map);
+int				check_line(char **tmp_map, char *line);
+void			map_data_check(t_config *config);
+void			check_valid_map(t_config *config);
+void			check_map(t_config *config);
+void			check_player(t_config *config);
+void			check_space(t_config *config, int i, int j);
+int				check_map_row_start(char *map_line);
+int				skip_line(char *line);
+void			free_line(char **line);
+int				line_len(char **line);
+void			set_directions(char **identifier, char *line);
+void			init_fc(t_config *config, char *line, int i, char *fc_config);
+int				check_chars(char *line);
+void			isolate_map_area(t_config *config);
+void			check_doors(char **map);
+int				row(char *line);
 #endif

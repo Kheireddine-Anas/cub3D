@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   checker1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 08:56:03 by akheired          #+#    #+#             */
-/*   Updated: 2024/08/16 09:11:35 by akheired         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:49:00 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	check_line(char **tmp_map, char *line)
 {
@@ -50,9 +50,11 @@ int	check_map_row_start(char *map_line)
 void	check_space(t_config *config, int i, int j)
 {
 	if (i == 0 || j == 0 || i == config->map_size - 1
-		|| j == row(config->cp_map[i]) - 1 || config->cp_map[i + 1][j] == ' '
-		|| config->cp_map[i - 1][j] == ' ' || config->cp_map[i][j + 1] == ' '
-		|| config->cp_map[i][j - 1] == ' ')
+		|| j == row(config->map->map_buffer[i]) - 1
+		|| config->map->map_buffer[i + 1][j] == ' '
+		|| config->map->map_buffer[i - 1][j] == ' '
+		|| config->map->map_buffer[i][j + 1] == ' '
+		|| config->map->map_buffer[i][j - 1] == ' ')
 	{
 		printf("Error\nInvalide Map!\n");
 		exit(1);
@@ -65,26 +67,27 @@ void	check_player(t_config *config)
 	int	j;
 
 	i = -1;
-	while (config->cp_map[++i])
+	while (config->map->map_buffer[++i])
 	{
 		j = -1;
-		while (config->cp_map[i][++j])
+		while (config->map->map_buffer[i][++j])
 		{
-			if (config->cp_map[i][j] == 'N' || config->cp_map[i][j] == 'E'
-				|| config->cp_map[i][j] == 'S' || config->cp_map[i][j] == 'W')
+			if (config->map->map_buffer[i][j] == 'N' 
+					|| config->map->map_buffer[i][j] == 'E'
+				|| config->map->map_buffer[i][j] == 'S' 
+				|| config->map->map_buffer[i][j] == 'W')
 			{
-				config->player_direction = config->cp_map[i][j];
-				config->player_x = i;
-				config->player_y = j;
+				config->player_direction = config->map->map_buffer[i][j];
+				config->player.x = j * config->size;
+				config->player.y = i * config->size;
 				config->p_d_count++;
+				determine_engle(&config, i, j);
 			}
 		}
 	}
+	config->map->map_height = i;
 	if (config->p_d_count != 1)
-	{
-		printf("Error\nNo more one player\n");
-		exit(1);
-	}
+		errr();
 }
 
 void	check_map(t_config *config)
@@ -92,14 +95,14 @@ void	check_map(t_config *config)
 	int	i;
 
 	i = -1;
-	while (config->cp_map[++i])
+	while (config->map->map_buffer[++i])
 	{
-		if (skip_line(config->cp_map[i]))
+		if (skip_line(config->map->map_buffer[i]))
 		{
 			printf("Error\nEmpty Line\n");
 			exit(1);
 		}
-		if (check_chars(config->cp_map[i]))
+		if (check_chars(config->map->map_buffer[i]))
 		{
 			printf("Error\nCheck Characters\n");
 			exit(1);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akheired <akheired@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 08:28:16 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/18 11:40:00 by akheired         ###   ########.fr       */
+/*   Updated: 2024/10/19 19:44:21 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	check_colors(t_config *config)
 {
@@ -19,8 +19,9 @@ void	check_colors(t_config *config)
 	i = -1;
 	while (++i < 3)
 	{
-		if (config->floor_color[i] < 0 || config->floor_color[i] > 255
-			|| config->ceiling_color[i] < 0 || config->ceiling_color[i] > 225)
+		if (config->map->floor_color[i] < 0 || config->map->floor_color[i] > 255
+			|| config->map->ceiling_color[i] < 0
+			|| config->map->ceiling_color[i] > 255)
 		{
 			printf("Error\nCheck Colors range\n");
 			exit(1);
@@ -56,13 +57,13 @@ int	check_config(char **line, t_config **map)
 			|| !ft_strcmp(line[0], "EA")))
 	{
 		if (!ft_strcmp(line[0], "NO"))
-			set_directions(&(*map)->north_texture, line[1]);
+			set_directions(&(*map)->map->north_texture, line[1]);
 		else if (!ft_strcmp(line[0], "SO"))
-			set_directions(&(*map)->south_texture, line[1]);
+			set_directions(&(*map)->map->south_texture, line[1]);
 		else if (!ft_strcmp(line[0], "WE"))
-			set_directions(&(*map)->west_texture, line[1]);
+			set_directions(&(*map)->map->west_texture, line[1]);
 		else if (!ft_strcmp(line[0], "EA"))
-			set_directions(&(*map)->east_texture, line[1]);
+			set_directions(&(*map)->map->east_texture, line[1]);
 		(*map)->config_count++;
 		return (0);
 	}
@@ -80,18 +81,18 @@ void	map_data_check(t_config *config)
 	char	**line;
 
 	i = -1;
-	while (config->map[++i])
+	while (config->maps[++i])
 	{
-		if (skip_line(config->map[i]))
+		if (skip_line(config->maps[i]))
 			continue ;
-		line = spliter(config->map[i]);
+		line = spliter(config->maps[i]);
 		if (check_config(line, &config) && config->config_count < 6)
 		{
 			printf("Error\nInvalide Config\n");
 			exit(1);
 		}
 		if (!ft_strcmp(line[0], "F") || !ft_strcmp(line[0], "C"))
-			init_fc(config, config->map[i], i, line[0]);
+			init_fc(config, config->maps[i], i, line[0]);
 		free_line(line);
 	}
 	check_colors(config);
@@ -103,16 +104,19 @@ void	check_valid_map(t_config *config)
 	int	j;
 
 	i = -1;
-	while (config->cp_map[++i])
+	while (config->map->map_buffer[++i])
 	{
 		j = -1;
-		while (config->cp_map[i][++j] != '\n' && config->cp_map[i][j] != '\0')
+		while (config->map->map_buffer[i][++j] != '\n' 
+				&& config->map->map_buffer[i][j] != '\0')
 		{
-			if (config->cp_map[i][j] == '0' || config->cp_map[i][j] == 'W'
-				|| config->cp_map[i][j] == 'D' || config->cp_map[i][j] == 'N'
-				|| config->cp_map[i][j] == 'S')
+			if (config->map->map_buffer[i][j] == '0'
+				|| config->map->map_buffer[i][j] == 'W'
+				|| config->map->map_buffer[i][j] == 'D' 
+				|| config->map->map_buffer[i][j] == 'N'
+				|| config->map->map_buffer[i][j] == 'S')
 				check_space(config, i, j);
 		}
 	}
-	check_doors(config->cp_map);
+	check_doors(config->map->map_buffer);
 }
