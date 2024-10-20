@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:48:09 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/20 12:06:40 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 12:57:45 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ typedef struct s_config
 	int						player_direction;
 	int						p_d_count;
 	t_ray					*rays;
-	long					floor_color;
-	long					ceiling_color;
+	int					floor_color;
+	int					ceiling_color;
 	t_chek_orizental		chek_orizental;
 	t_chek_chek_vertical	chek_vertical;
 	int						flag;
@@ -151,7 +151,7 @@ void			open_fd(char *path, int *fd);
 void			map_inistialisation(t_config *config, int *fd);
 void			errr(void);
 void			determine_engle(t_config **data, int i, int j);
-long			rgb_to_hex(int r, int g, int b);
+int				rgb_to_hex(int r, int g, int b);
 void			rotate_player(t_config **data, int i);
 int				open_close_door(t_config **data);
 void			mouve_d(t_config **data, double old_y, double old_x);
