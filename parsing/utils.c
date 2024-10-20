@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 08:48:04 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/18 13:09:22 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 10:05:43 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,31 @@ int	*init_color(char **line)
 		i++;
 	}
 	return (colors);
+}
+
+void	init_fc(t_config *config, char *line, int i, char *fc_config)
+{
+	int		j;
+	char	**tmp_map;
+
+	j = 0;
+	while (config->maps[i][j] == ' ' || config->maps[i][j] == '\t'
+		|| config->maps[i][j] == 'F' || config->maps[i][j] == 'C')
+		j++;
+	tmp_map = ft_split(line + j, ',');
+	if (check_line(tmp_map, line + j))
+	{
+		printf("Error\nCheck lines\n"); 
+		exit(1);
+	}
+	if (fc_config[0] == 'F' && !config->map->floor_color)
+		config->map->floor_color = init_color(tmp_map);
+	else if (fc_config[0] == 'C' && !config->map->ceiling_color)
+		config->map->ceiling_color = init_color(tmp_map);
+	else if (config->map->floor_color || config->map->ceiling_color)
+	{
+		printf("Error\nDuplicated F || C\n"); 
+		exit(1);
+	}
+	free_line(tmp_map);
 }

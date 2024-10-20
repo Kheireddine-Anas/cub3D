@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:48:09 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/19 19:49:13 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 10:05:58 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,11 @@ typedef struct s_config
 	int						map_size;
 }		t_config;
 void			hook(void *ml);
+void			init_fc(t_config *config, char *line, int i, char *fc_config);
+void			error_intalis(t_config **data);
+void			struct_instialisation(t_config *config, char *path);
+void			open_fd(char *path, int *fd);
+void			map_inistialisation(t_config *config, int *fd);
 void			errr(void);
 void			determine_engle(t_config **data, int i, int j);
 unsigned int	rgb_to_hex(int r, int g, int b);

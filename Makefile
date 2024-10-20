@@ -1,6 +1,6 @@
 SRCS =	main.c getNextLine/get_next_line_utils.c getNextLine/get_next_line.c  texture/draw.c texture/control_kebord.c\
 		texture/draw_util1.c  texture/ray.c texture/rander_util1.c  texture/rander_wall.c  texture/chek_distance_horizental.c  texture/draw_mini_map.c texture/chek_distance_vertical.c texture/door.c texture/control_kebord_util1.c\
-		texture/control_kebord_util2.c parsing/checker1.c  parsing/checkers.c   parsing/spliter.c parsing/utils.c parsing/utils1.c parsing/utils2.c
+		texture/control_kebord_util2.c parsing/checker1.c  parsing/checkers.c   parsing/spliter.c parsing/utils.c parsing/utils1.c parsing/utils2.c parsing/utils3.c
 
 OBJS			= $(SRCS:.c=.o)
 
