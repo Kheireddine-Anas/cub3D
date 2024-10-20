@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:48:09 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/20 12:57:45 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 19:02:48 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct s_config
 	int						map_size;
 }		t_config;
 void			hook(void *ml);
+void			error_invalid(void);
 void			init_fc(t_config *config, char *line, int i, char *fc_config);
 void			error_intalis(t_config **data);
 void			struct_instialisation(t_config *config, char *path);

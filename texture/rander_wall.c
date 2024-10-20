@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:06:49 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/18 19:19:40 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 19:49:12 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ mlx_texture_t	*get_texture_bonus(t_config *mlx, int flag)
 			return (texture_ver);
 		else if (mlx->ray.ray_ngl > M_PI / 2 && mlx->ray.ray_ngl < 3 
 			* (M_PI / 2))
-			return (mlx->texture_west);
-		else
 			return (mlx->texture_east);
+		else
+			return (mlx->texture_west);
 	}
 	else if (texture_or)
 		return (texture_or);

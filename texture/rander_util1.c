@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:38:25 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/20 10:33:38 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 19:51:33 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ mlx_texture_t	*chek_dor_a_ori(t_config *mlx)
 			&& mlx->map->map_buffer[map_y][map_x] == '4')
 			return (mlx->texture_open_dor);
 		if (mlx->ray.ray_ngl > 0 && mlx->ray.ray_ngl < M_PI)
-			return (mlx->texture_north);
-		else
 			return (mlx->texture_south);
+		else
+			return (mlx->texture_north);
 	}
 	return (NULL);
 }
@@ -90,6 +90,6 @@ mlx_texture_t	*chek_dor_avertical(t_config *mlx)
 		&& mlx->map->map_buffer[map_y]
 		&& map_x >= 0 && map_x < mlx->map->map_width
 		&& mlx->map->map_buffer[map_y][map_x] == '4')
-		return (mlx->texture_close_dor);
+		return (mlx->texture_open_dor);
 	return (NULL);
 }

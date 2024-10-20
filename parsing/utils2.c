@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 09:03:26 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/19 19:45:20 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 19:30:58 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	check_doors(char **map)
 		{
 			if (map[i][j] == 'D')
 			{
-				if (map[i][j - 1] != '1' || map[i][j + 1] != '1')
+				if ((map[i][j - 1] != '1' || map[i][j + 1] != '1') 
+					&& (map[i - 1][j] != '1' || map[i + 1][j] != '1'))
 				{
 					printf("Error\nCheck Doors\n");
 					exit (1);
@@ -68,4 +69,10 @@ void	check_doors(char **map)
 			}
 		}
 	}
+}
+
+void	error_invalid(void)
+{
+	ft_putstr_fd("invalid map\n", 2);
+	exit (1);
 }
