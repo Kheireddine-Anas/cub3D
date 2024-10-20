@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 08:28:16 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/20 13:56:16 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 14:49:06 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,12 @@ void	check_valid_map(t_config *config)
 	int	i;
 	int	j;
 
+	if (ft_strlen(config->map->map_buffer[0]) 
+		< ft_strlen(config->map->map_buffer[1]))
+	{
+		ft_putstr_fd("invalid map\n", 2);
+		exit (1);
+	}
 	i = -1;
 	while (config->map->map_buffer[++i])
 	{
