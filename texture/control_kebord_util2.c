@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:10:56 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/19 19:52:15 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 12:06:51 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	fontion_mlx_and_draw(t_config **data)
 	mlx_set_cursor_mode((*data)->mlx_ptr, MLX_MOUSE_HIDDEN);
 }
 
-unsigned int	rgb_to_hex(int r, int g, int b)
+long	rgb_to_hex(int r, int g, int b)
 {
 	int	a;
 
