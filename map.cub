@@ -1,8 +1,8 @@
-C 0,255,0
+C 0,0,255
 SO     ./textures/the_starry_night.png
 WE      ./textures/girl_with_a_pearl_earring.png
 EA       ./textures/Impression_Sunrise.png
-F 0,  0,   255
+F 0,  255,   0
 NO ./textures/Mona_Lisa.png
 
 
