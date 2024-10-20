@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:18:40 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/20 10:24:26 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 13:49:04 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ void	inial_textures(t_config *data)
 	data->floor_color = rgb_to_hex(data->map->floor_color[0], 
 			data->map->floor_color[1], data->map->floor_color[2]);
 }
+void leaks (void)
+{
+	system("leaks cub3D");
+}
 
 void	intail_parsin(int ac, char **av, t_config	*data)
 {
@@ -80,6 +84,7 @@ int	main(int ac, char **av)
 {
 	t_config	*data;
 
+	// atexit(leaks );
 	data = ft_calloc(1, sizeof(t_config));
 	if (!data)
 	{

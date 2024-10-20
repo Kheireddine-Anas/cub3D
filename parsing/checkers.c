@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 08:28:16 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/19 19:44:21 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/20 13:56:16 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,13 @@ void	map_data_check(t_config *config)
 			init_fc(config, config->maps[i], i, line[0]);
 		free_line(line);
 	}
-	check_colors(config);
+	if (config->map->floor_color && config->map->ceiling_color)
+		check_colors(config);
+	else
+	{
+		printf("Error\nInvalide Config\n");
+		exit(1);
+	}
 }
 
 void	check_valid_map(t_config *config)
