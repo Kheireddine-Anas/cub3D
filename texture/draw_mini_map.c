@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 13:38:31 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/18 20:36:37 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/23 17:40:03 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ void	draw_centered_image(t_config *data, mlx_texture_t *texture)
 			if ((arr[y * texture->width + x] & 0xFF000000) != 0)
 			{
 				mlx_put_pixel(data->img, ((data->width_window - texture->width)
-						/ 2) + x, (data->height_window - texture->height)
-					+ y, reverse_bytes(arr[y * texture->width + x]));
+					/ 2) + x, (data->height_window - texture->height) + y, reverse_bytes(arr[y * texture->width + x]));
 			}
 			x++;
 		}
@@ -91,33 +90,6 @@ void	draw_centered_image(t_config *data, mlx_texture_t *texture)
 	}
 }
 
-void	draw_enter(t_config *data, mlx_texture_t *texture)
-{
-	uint32_t	x;
-	uint32_t	y;
-	uint32_t	color;
-	uint32_t	*arr;
-
-	arr = (uint32_t *)texture->pixels;
-	y = 0;
-	while (y < texture->height)
-	{
-		x = 0;
-		while (x < texture->width)
-		{
-			color = arr[y * texture->width + x];
-			if ((color & 0xFF000000) != 0)
-			{
-				mlx_put_pixel(data->img, 
-					((data->width_window - texture->width) / 2) + x, 
-					((data->height_window - texture->height) / 2) + y,
-					reverse_bytes(color));
-			}
-			x++;
-		}
-		y++;
-	}
-}
 
 int	close_window(t_config **data)
 {

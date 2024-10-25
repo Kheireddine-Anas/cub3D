@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:18:40 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/20 13:58:09 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/23 15:41:07 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	inial_textures(t_config *data)
 		error_intalis(&data);
 	data->move_x = 0;
 	data->move_y = 0;
+	data->mouv_down = 0;
+	data->mouv_up = 0;
 	data->dor_x = -1;
 	data->dor_y = -1;
 	data->player.fov_rd = (FOV * M_PI) / 180;

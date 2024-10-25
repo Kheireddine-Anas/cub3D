@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:48:09 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/20 19:02:48 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/23 17:40:37 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_config
 	int						fd_map;
 	void					*mlx_ptr;
 	int						width_window;
-	int						height_window;
+	unsigned int			height_window;
 	double					mouv_camera_left;
 	double					move_x;
 	double					move_y;
@@ -125,13 +125,15 @@ typedef struct s_config
 	int						size;
 	int						dor_x;
 	int						dor_y;
+	int						mouv_down;
+	int						mouv_up;
 	t_player				player;
 	t_ray					ray;
 	int						player_direction;
 	int						p_d_count;
 	t_ray					*rays;
-	int					floor_color;
-	int					ceiling_color;
+	int						floor_color;
+	int						ceiling_color;
 	t_chek_orizental		chek_orizental;
 	t_chek_chek_vertical	chek_vertical;
 	int						flag;

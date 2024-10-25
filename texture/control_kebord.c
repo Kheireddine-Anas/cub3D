@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:49:12 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/27 11:23:41 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/23 17:37:38 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,12 @@ void	mouve_d(t_config **data, double old_y, double old_x)
 
 void	shut_(t_config **data)
 {
+	static int	frame;
+
 	mlx_delete_image((*data)->mlx_ptr, (*data)->img);
-	draw_update(data, (*data)->texture_pa);
-	draw_enter(*data, (*data)->texture_toush);
-	return ;
-	mlx_delete_image((*data)->mlx_ptr, (*data)->img);
-	draw_update(data, (*data)->texture_r);
-	return ;
+	if (frame % 5 == 0)
+		draw_update(data, (*data)->texture_pa);
+	else
+		draw_update(data, (*data)->texture_r);
+	frame++;
 }

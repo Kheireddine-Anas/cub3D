@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:07:03 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/09/27 11:20:12 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/23 17:50:01 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,15 @@ void	mouve_a(t_config **data, double old_y, double old_x)
 
 static int	if_condition(t_config **data, double old_y, double old_x)
 {
-	if (mlx_is_mouse_down((*data)->mlx_ptr, MLX_MOUSE_BUTTON_LEFT))
+	if (mlx_is_mouse_down((*data)->mlx_ptr, 0))
 	{
 		shut_(data);
 		return (1);
 	}
+	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_UP))
+		(*data)->mouv_up += 5;
+	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_DOWN))
+		(*data)->mouv_up -= 5;
 	else if (open_close_door(data) == 1)
 		return (1);
 	else if (mlx_is_key_down((*data)->mlx_ptr, 256))
@@ -99,11 +103,9 @@ static int	if_condition(t_config **data, double old_y, double old_x)
 		rotate_player(data, 1);
 	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_LEFT))
 		rotate_player(data, 0);
-	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_W)
-		|| mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_UP))
+	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_W))
 		mouve_w(data, old_y, old_x);
-	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_S)
-		|| mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_DOWN))
+	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_S))
 		mouve_s(data, old_y, old_x);
 	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_A))
 		mouve_a(data, old_y, old_x);
