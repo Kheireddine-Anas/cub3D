@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:07:03 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/23 17:50:01 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/29 19:31:08 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,7 @@ void	mouve_a(t_config **data, double old_y, double old_x)
 static int	if_condition(t_config **data, double old_y, double old_x)
 {
 	if (mlx_is_mouse_down((*data)->mlx_ptr, 0))
-	{
-		shut_(data);
-		return (1);
-	}
+		return (shut_(data));
 	if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_UP))
 		(*data)->mouv_up += 5;
 	else if (mlx_is_key_down((*data)->mlx_ptr, MLX_KEY_DOWN))

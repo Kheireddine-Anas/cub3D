@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 21:22:04 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/23 16:31:30 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/29 19:28:36 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	draw_square(t_config **data, int x, int y, int color)
 {
-	int	i;
-	int	j;
-	int	x_map;
+	int				i;
+	int				j;
+	int				x_map;
 	unsigned int	y_map;
 
 	i = 0;
@@ -38,9 +38,9 @@ void	draw_square(t_config **data, int x, int y, int color)
 
 void	draw_square_player(t_config **data, int x, int y, int color)
 {
-	int	i;
-	int	j;
-	int	x_map;
+	int				i;
+	int				j;
+	int				x_map;
 	unsigned int	y_map;
 
 	i = 0;

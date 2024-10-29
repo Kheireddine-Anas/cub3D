@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 20:49:12 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/23 17:37:38 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/29 19:30:21 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	mouve_d(t_config **data, double old_y, double old_x)
 	}
 }
 
-void	shut_(t_config **data)
+int	shut_(t_config **data)
 {
 	static int	frame;
 
@@ -100,4 +100,5 @@ void	shut_(t_config **data)
 	else
 		draw_update(data, (*data)->texture_r);
 	frame++;
+	return (1);
 }

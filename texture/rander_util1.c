@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:38:25 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/23 16:33:19 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/29 19:29:02 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	my_mlx_pixel_put(t_config *data, double x, double y, int color)
 void	draw_floor_ceiling(t_config *data, int ray, int top_pix, int min_pix)
 {
 	int	i;
-	
-	int hig;
+	int	hig;
 
 	hig = data->height_window;
 	i = 0;

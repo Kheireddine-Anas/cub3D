@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 16:06:49 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/23 16:08:11 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/29 19:27:25 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,13 @@ void	draw_wall(t_config *mlx, double top_pix, double min_pix, double wall_h)
 	arr = (uint32_t *)texture->pixels;
 	y_step = (double)texture->height / wall_h;
 	x_o = get_x_o(texture, mlx);
-	y_o = ((top_pix - mlx->mouv_up) - (mlx->height_window / 2) + (wall_h / 2)) * y_step;
+	y_o = ((top_pix - mlx->mouv_up)
+			- (mlx->height_window / 2) + (wall_h / 2)) * y_step;
 	if (y_o < 0)
 		y_o = 0;
 	while (top_pix < min_pix)
 	{
-		if(top_pix  > 0 && top_pix < mlx->height_window)
+		if (top_pix > 0 && top_pix < mlx->height_window)
 			mlx_put_pixel(mlx->img, mlx->ray.index, top_pix,
 				reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
 		y_o += y_step;

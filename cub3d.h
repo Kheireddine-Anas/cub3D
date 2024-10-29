@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:48:09 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/23 17:40:37 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/29 19:30:51 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int				rgb_to_hex(int r, int g, int b);
 void			rotate_player(t_config **data, int i);
 int				open_close_door(t_config **data);
 void			mouve_d(t_config **data, double old_y, double old_x);
-void			shut_(t_config **data);
+int				shut_(t_config **data);
 mlx_texture_t	*chek_dor_avertical(t_config *mlx);
 mlx_texture_t	*chek_dor_a_ori(t_config *mlx);
 int				check_intersection(t_config *data, double xintercept, 
