@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 09:03:26 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/20 19:30:58 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/10/30 18:00:58 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,18 @@ void	isolate_map_area(t_config *config)
 	free_line(config->maps);
 }
 
-int	row(char *line)
+int row(char *line)
 {
-	int	i;
+    int i;
 
 	i = 0;
-	while (line[i] != '\n' && line[i] != '\0')
-		i++;
-	while (line[--i] != ' ')
-		;
-	return (i + 1);
+    while (line[i] && line[i] != '\n')
+        i++;
+    if (i == 0)
+        return 0;
+    while (i > 0 && line[i - 1] != ' ')
+        i--;
+    return (i);
 }
 
 void	check_doors(char **map)
