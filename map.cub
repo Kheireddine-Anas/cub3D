@@ -1,8 +1,8 @@
-C 2,25,87
+C 2,25,85
 SO     ./textures/the_starry_night.png
 WE      ./textures/Mona_Lisa.png
 EA       ./textures/girl_with_a_pearl_earring.png
-F 2,125,10
+F 2,125,85
 NO ./textures/seamless_stone.png
 
 
