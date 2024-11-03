@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 10:48:09 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/11/02 19:27:45 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/11/03 11:06:05 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ typedef struct s_config
 	void					*img;
 	int						fd_map;
 	void					*mlx_ptr;
-	int						width_window;
-	unsigned int			height_window;
+	double					width_window;
+	double					height_window;
 	double					mouv_camera_left;
 	double					move_x;
 	double					move_y;
