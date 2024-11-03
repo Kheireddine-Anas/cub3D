@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 10:37:07 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/17 11:20:19 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:10:54 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 int	check_intersection(t_config *data, double xintercept, double hintercept)
 {
-	int	mapgridindex_x;
-	int	mapgridindex_y;
+	char	cell_value;
+	int		mapgridindex_x;
+	int		mapgridindex_y;
 
+	if (data == NULL || data->map == NULL)
+		return (0);
 	mapgridindex_x = (int)floor(xintercept / data->size);
 	mapgridindex_y = (int)floor(hintercept / data->size);
 	if (mapgridindex_x < 0 || mapgridindex_x >= data->map->map_width
 		|| mapgridindex_y < 0 || mapgridindex_y >= data->map->map_height)
 		return (0);
-	if (data->map->map_buffer[mapgridindex_y][mapgridindex_x] == '1'
-		|| data->map->map_buffer[mapgridindex_y][mapgridindex_x] == 'D'
-		|| data->map->map_buffer[mapgridindex_y][mapgridindex_x] == '4')
+	cell_value = data->map->map_buffer[mapgridindex_y][mapgridindex_x];
+	if (cell_value == '1' || cell_value == 'D' || cell_value == '4')
 		return (0);
 	return (1);
 }
