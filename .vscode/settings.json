@@ -25,5 +25,10 @@
 		
 	},
 	"C_Cpp.errorSquiggles": "disabled",
-	"cmake.sourceDirectory": "/Users/ahamdi/Desktop/cub3D/MLX42"
+	"cmake.sourceDirectory": "/Users/ahamdi/Desktop/cub3D/MLX42",
+	"workbench.colorCustomizations": {
+		"activityBar.background": "#3D1471",
+		"titleBar.activeBackground": "#561C9E",
+		"titleBar.activeForeground": "#FCFAFE"
+	}
 }
