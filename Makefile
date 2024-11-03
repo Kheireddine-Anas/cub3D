@@ -16,6 +16,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS)
 			make -C libft 
 			$(CC) ${CFLAGS} -o ${NAME} ${LIBFT} ${OBJS} ${MLX_LIB}
+bonus : all
 
 %.o:	%.c
 			$(CC) $(CFLAGS) -c $< -o $@
