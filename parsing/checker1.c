@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 08:56:03 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/30 17:55:31 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:40:49 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ void	check_space(t_config *config, int i, int j)
 	if (i == 0 || j == 0 || i == config->map->map_height - 1
 		|| j == row(config->map->map_buffer[i]) - 1
 		|| (config->map->map_buffer[i + 1] && 
-		config->map->map_buffer[i + 1][j] == ' ')
-		|| (config->map->map_buffer[i - 1]&&config->map->map_buffer[i - 1][j] == ' ')
+			config->map->map_buffer[i + 1][j] == ' ')
+		|| (config->map->map_buffer[i - 1]
+			&& config->map->map_buffer[i - 1][j] == ' ')
 		|| config->map->map_buffer[i][j + 1] == ' '
 		|| config->map->map_buffer[i][j - 1] == ' ')
 	{

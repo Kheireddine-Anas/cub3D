@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:38:25 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/11/03 10:23:51 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:37:18 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ int	reverse_bytes(int c)
 
 void	my_mlx_pixel_put(t_config *data, double x, double y, int color)
 {
-	if (x < 0 || x > data->width_window || y > data->height_window || y < 0)
+	if (x < 0 || x > data->width_window || y < 0
+		|| y > data->height_window)
 		return ;
-	mlx_put_pixel(data->img, x, y, color);
+	else
+		mlx_put_pixel(data->img, x, y, color);
 }
 
 void	draw_floor_ceiling(t_config *data, int ray, int top_pix, int min_pix)
@@ -39,10 +41,18 @@ void	draw_floor_ceiling(t_config *data, int ray, int top_pix, int min_pix)
 	hig = data->height_window;
 	i = 0;
 	while (i < top_pix)
-		my_mlx_pixel_put(data, ray, i++, data->ceiling_color);
+	{
+		if (ray < data->width_window)
+			my_mlx_pixel_put(data, ray, i, data->ceiling_color);
+		i++;
+	}
 	i = min_pix;
 	while (i < hig)
-		my_mlx_pixel_put(data, ray, i++, data->floor_color);
+	{
+		if (ray < data->width_window)
+			my_mlx_pixel_put(data, ray, i, data->floor_color);
+		i++;
+	}
 }
 
 mlx_texture_t	*chek_dor_a_ori(t_config *mlx)

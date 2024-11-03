@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 16:29:18 by akheired          #+#    #+#             */
-/*   Updated: 2024/11/02 19:27:13 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:42:08 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,4 @@ char	**spliter(char *str)
 	}
 	strings[i] = NULL;
 	return (strings);
-}
-
-void	errr(void)
-{
-	printf("Error\nNo more one player\n");
-	exit(1);
 }

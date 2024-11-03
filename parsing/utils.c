@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 08:48:04 by akheired          #+#    #+#             */
-/*   Updated: 2024/10/20 10:05:43 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:42:15 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,10 @@ void	init_fc(t_config *config, char *line, int i, char *fc_config)
 		exit(1);
 	}
 	free_line(tmp_map);
+}
+
+void	errr(void)
+{
+	printf("Error\nNo more one player\n");
+	exit(1);
 }

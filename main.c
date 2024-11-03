@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/11 19:18:40 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/30 17:37:57 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:43:24 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,11 @@ void	intail_parsin(int ac, char **av, t_config	*data)
 	check_valid_map(data);
 	inial_textures(data);
 }
-void leaks (void)
-{
-	system("leaks   cub3D");
-}
+
 int	main(int ac, char **av)
 {
 	t_config	*data;
-	
+
 	data = ft_calloc(1, sizeof(t_config));
 	if (!data)
 	{
