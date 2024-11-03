@@ -6,7 +6,7 @@
 /*   By: ahamdi <ahamdi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 12:38:25 by ahamdi            #+#    #+#             */
-/*   Updated: 2024/10/29 19:29:02 by ahamdi           ###   ########.fr       */
+/*   Updated: 2024/11/03 10:23:51 by ahamdi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ mlx_texture_t	*chek_dor_a_ori(t_config *mlx)
 		if (mlx->map->map_buffer
 			&& map_y >= 0 && map_y < mlx->map->map_height
 			&& mlx->map->map_buffer[map_y]
-			&& map_x >= 0 && map_x < mlx->map->map_width
+			&& map_x >= 0 && map_x < (int)ft_strlen(mlx->map->map_buffer[map_y])
 			&& mlx->map->map_buffer[map_y][map_x] == 'D')
 			return (mlx->texture_close_dor);
 		else if (mlx->map->map_buffer
 			&& map_y >= 0 && map_y < mlx->map->map_height
 			&& mlx->map->map_buffer[map_y]
-			&& map_x >= 0 && map_x < mlx->map->map_width
+			&& map_x >= 0 && map_x < (int)ft_strlen(mlx->map->map_buffer[map_y])
 			&& mlx->map->map_buffer[map_y][map_x] == '4')
 			return (mlx->texture_open_dor);
 		if (mlx->ray.ray_ngl > 0 && mlx->ray.ray_ngl < M_PI)
@@ -84,13 +84,13 @@ mlx_texture_t	*chek_dor_avertical(t_config *mlx)
 	if (mlx->map->map_buffer
 		&& map_y >= 0 && map_y < mlx->map->map_height
 		&& mlx->map->map_buffer[map_y]
-		&& map_x >= 0 && map_x < mlx->map->map_width
+		&& map_x >= 0 && map_x < (int)ft_strlen(mlx->map->map_buffer[map_y])
 		&& mlx->map->map_buffer[map_y][map_x] == 'D')
 		return (mlx->texture_close_dor);
 	else if (mlx->map->map_buffer
 		&& map_y >= 0 && map_y < mlx->map->map_height
 		&& mlx->map->map_buffer[map_y]
-		&& map_x >= 0 && map_x < mlx->map->map_width
+		&& map_x >= 0 && map_x < (int)ft_strlen(mlx->map->map_buffer[map_y])
 		&& mlx->map->map_buffer[map_y][map_x] == '4')
 		return (mlx->texture_open_dor);
 	return (NULL);
