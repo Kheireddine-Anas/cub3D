@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// Codam Coding College, Amsterdam @ 2022-2023 by W2Wizard.						  
+// Codam Coding College, Amsterdam @ 2022-2023 by W2Wizard.					  
 // See README in the root project for more information.					  	  
 // -----------------------------------------------------------------------------
 
